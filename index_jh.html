@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jihun Chae - Ph.D. student at KAIST researching Human-AI Interaction, play experience, Game AI, and Ludic AI." />
+  <title>Jihun Chae | KAIST HCI & AI Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       TOKENS
+       ═══════════════════════════════════════════════════════════ */
+    :root {
+      --bg: #07070b;
+      --bg2: #0b0b13;
+      --text: #f5f5f7;
+      --muted: #babac4;
+      --soft: #8b8b95;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --shadow: 0 20px 60px rgba(0,0,0,0.32);
+      --wrap: 1180px;
+      --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --ease-spring: cubic-bezier(0.34, 1.4, 0.44, 1);
+
+      /* Section accent colors */
+      --c-education: 251, 191, 36;
+      --c-projects:  96, 165, 250;
+      --c-awards:    244, 114, 182;
+      --c-pubs:      52, 211, 153;
+      --c-patents:   167, 139, 250;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      position: relative;
+      font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+    }
+    body.ko {
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    }
+
+    ::selection {
+      background: rgba(96,165,250,0.32);
+      color: #fff;
+      text-shadow: none;
+    }
+
+    *:focus { outline: none; }
+    *:focus-visible {
+      outline: 2px solid rgba(96,165,250,0.75);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    a:focus-visible { outline-offset: 4px; }
+
+    h1, h2, h3, h4, .section-title, .name, .item-title { text-wrap: balance; }
+    p, .item-desc, .lead, .intro { text-wrap: pretty; }
+
+    /* ═══════════════════════════════════════════════════════════
+       LANGUAGE TOGGLE (CSS-only visibility)
+       ═══════════════════════════════════════════════════════════ */
+    body [lang="ko"] { display: none; }
+    body.ko [lang="en"] { display: none; }
+
+    body.ko span[lang="ko"],
+    body.ko em[lang="ko"],
+    body.ko a[lang="ko"],
+    body.ko strong[lang="ko"],
+    body.ko code[lang="ko"]   { display: inline; }
+
+    body.ko p[lang="ko"],
+    body.ko div[lang="ko"],
+    body.ko h1[lang="ko"],
+    body.ko h2[lang="ko"],
+    body.ko h3[lang="ko"],
+    body.ko h4[lang="ko"],
+    body.ko ul[lang="ko"],
+    body.ko ol[lang="ko"],
+    body.ko section[lang="ko"] { display: block; }
+
+    body.ko li[lang="ko"]      { display: list-item; }
+
+    body.ko .side-list[lang="ko"],
+    body.ko .contact-list[lang="ko"] { display: grid; }
+
+    body:not(.reader) { background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%); }
+
+    /* ═══════════════════════════════════════════════════════════
+       AMBIENT LAYERS
+       ═══════════════════════════════════════════════════════════ */
+    .aurora {
+      position: fixed;
+      inset: -20%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(96,165,250,0.09), transparent 38%),
+        radial-gradient(circle at 85% 30%, rgba(244,114,182,0.06), transparent 35%),
+        radial-gradient(circle at 70% 85%, rgba(52,211,153,0.06), transparent 40%),
+        radial-gradient(circle at 25% 90%, rgba(251,191,36,0.04), transparent 38%);
+      filter: blur(60px) saturate(130%);
+      animation: drift 32s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      0%   { transform: translate3d(0, 0, 0); }
+      50%  { transform: translate3d(1.5%, -1%, 0); }
+      100% { transform: translate3d(-1%, 1%, 0); }
+    }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle 380px at var(--gx, 50%) var(--gy, 30%), #000 0%, transparent 60%);
+      -webkit-mask-image: radial-gradient(circle 380px at var(--gx, 50%) var(--gy, 30%), #000 0%, transparent 60%);
+      opacity: 0.5;
+      transition: opacity 0.6s ease;
+    }
+    body.no-cursor .ambient { opacity: 0; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.045;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/></svg>");
+      background-size: 200px 200px;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg,
+        rgba(96,165,250,0.9), rgba(244,114,182,0.9), rgba(52,211,153,0.9));
+      z-index: 100;
+      transition: width 0.08s linear;
+      box-shadow: 0 0 14px rgba(255,255,255,0.22);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ═══════════════════════════════════════════════════════════
+       TOP CONTROLS (Reader + Lang)
+       ═══════════════════════════════════════════════════════════ */
+    .top-controls {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 110;
+      display: inline-flex;
+      gap: 8px;
+    }
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(12,12,16,0.78);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      color: var(--text);
+      font: 600 0.82rem/1 'Inter', 'Pretendard', sans-serif;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 0.25s var(--ease-spring), border-color 0.22s ease, background 0.22s ease, color 0.22s ease;
+    }
+    .pill-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      background: rgba(20,20,26,0.92);
+    }
+    .pill-btn:active { transform: translateY(0) scale(0.97); }
+    .pill-btn .icon {
+      width: 14px;
+      height: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pill-btn .icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── Floating Laboratory entry - right edge of the screen ── */
+    .lab-fab {
+      position: fixed;
+      right: 18px;
+      bottom: 20px;
+      z-index: 111;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 17px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: linear-gradient(120deg, rgba(96,165,250,0.22), rgba(167,139,250,0.16), rgba(52,211,153,0.14));
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      color: #fff;
+      font: 700 0.86rem/1 'Inter', 'Pretendard', sans-serif;
+      letter-spacing: 0.01em;
+      box-shadow: 0 16px 38px rgba(0,0,0,0.34);
+      transition: transform 0.28s var(--ease-spring), box-shadow 0.25s ease, border-color 0.22s ease;
+    }
+    body.ko .lab-fab { font-family: 'Pretendard Variable', 'Pretendard', sans-serif; }
+    .lab-fab:hover {
+      transform: translateY(-3px);
+      border-color: rgba(96,165,250,0.6);
+      box-shadow: 0 22px 48px rgba(0,0,0,0.44);
+    }
+    .lab-fab:active { transform: translateY(0) scale(0.97); }
+    .lab-fab .icon { width: 16px; height: 16px; display: inline-flex; }
+    .lab-fab .icon svg {
+      width: 100%; height: 100%;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .lab-fab .arrow { opacity: 0.7; transition: transform 0.25s var(--ease-spring); }
+    .lab-fab:hover .arrow { transform: translateX(3px); }
+    .lab-fab .dot {
+      width: 6px; height: 6px; border-radius: 999px;
+      background: #9af0a4; box-shadow: 0 0 10px rgba(154,240,164,0.85);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+    @media (max-width: 700px) { .lab-fab { display: none; } }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(var(--wrap), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 36px 0 0;
+    }
+
+    .mobile-nav { display: none; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 330px minmax(0, 1fr);
+      gap: 68px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      width: 330px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PROFILE CARD
+       ═══════════════════════════════════════════════════════════ */
+    .profile-card {
+      position: relative;
+      padding: 20px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      transform-style: preserve-3d;
+      transition: transform 0.4s var(--ease-out), border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+      will-change: transform;
+    }
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(96,165,250,0.45), transparent 55%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+              mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .profile-card:hover::before { opacity: 1; }
+    .profile-card:hover {
+      border-color: var(--line-strong);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.42);
+    }
+
+    .profile-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      aspect-ratio: 4 / 5;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.025);
+    }
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+    .profile-card:hover .profile-image img {
+      transform: scale(1.025);
+      filter: grayscale(70%) saturate(1.05);
+    }
+    .profile-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--soft);
+      font-size: 0.92rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+
+    .name {
+      margin: 0 0 8px;
+      font-size: 2.1rem;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+      color: #fff;
+    }
+    body.ko .name {
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .role, .org { margin: 0; color: var(--muted); font-size: 0.96rem; }
+    .org { margin-top: 4px; }
+
+    .divider {
+      height: 1px;
+      margin: 20px 0;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .side-label {
+      margin: 0 0 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--soft);
+    }
+    body.ko .side-label {
+      text-transform: none;
+      letter-spacing: 0.04em;
+      font-size: 0.85rem;
+    }
+
+    .side-list {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .side-list > div {
+      position: relative;
+      padding-left: 14px;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+    .side-list > div::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 6px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+    .side-list > div:hover { color: #fff; transform: translateX(2px); }
+    .side-list > div:hover::before { width: 10px; background: rgba(96,165,250,0.85); }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .contact-list a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .contact-list a::after {
+      content: "↗";
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      font-size: 0.85em;
+      color: var(--soft);
+    }
+    .contact-list a:hover {
+      transform: translateX(2px);
+      color: #fff;
+    }
+    .contact-list a[href*="linkedin"]:hover    { color: #4a8fcf; }
+    .contact-list a[href*="scholar"]:hover     { color: #6ba8f5; }
+    .contact-list a[href*="orcid"]:hover       { color: #b8d96c; }
+    .contact-list a[href^="mailto"]:hover      { color: #f0b365; }
+    .contact-list a:hover::after {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    .contact-list a.copied::after {
+      content: "✓";
+      opacity: 1;
+      transform: translate(0,0);
+      color: #9af0a4;
+    }
+
+    .section-nav {
+      display: grid;
+      gap: 2px;
+      margin: 4px 0 0;
+      font-size: 0.9rem;
+    }
+    .section-nav a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 6px 10px 6px 14px;
+      color: var(--soft);
+      border-radius: 10px;
+      transition: color 0.25s ease, background 0.25s ease, padding-left 0.3s var(--ease-spring);
+    }
+    .section-nav a::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+      transition: background 0.3s ease, width 0.3s ease, height 0.3s ease;
+    }
+    .section-nav a:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.04);
+    }
+    .section-nav a.active {
+      color: #fff;
+      padding-left: 22px;
+    }
+    .section-nav a.active::before {
+      background: linear-gradient(90deg, rgba(96,165,250,1), rgba(244,114,182,1));
+      width: 12px;
+      height: 1.5px;
+      border-radius: 2px;
+    }
+
+    .button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.86));
+      color: #111;
+      font-size: 0.93rem;
+      font-weight: 700;
+      margin-top: 24px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+      transition: box-shadow 0.22s ease, filter 0.22s ease;
+      overflow: hidden;
+    }
+    .button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.85), transparent);
+      transform: skewX(-18deg);
+      transition: left 0.6s var(--ease-out);
+    }
+    .button:hover::before { left: 130%; }
+    .button:hover {
+      box-shadow: 0 16px 34px rgba(0,0,0,0.24);
+      filter: brightness(1.02);
+    }
+    .button .arrow {
+      display: inline-block;
+      margin-left: 8px;
+      transition: transform 0.25s var(--ease-spring);
+    }
+    .button:hover .arrow { transform: translateX(4px); }
+
+    /* ═══════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════════════ */
+    .content {
+      min-width: 0;
+      width: 100%;
+      padding-top: 8px;
+    }
+
+    /* ── HERO with the signature: an endless match between two
+         autonomous agents, faintly playing in the background ── */
+    .hero {
+      position: relative;
+      margin-bottom: 26px;
+    }
+    .pong-stage {
+      position: absolute;
+      inset: -12px -8px -4px;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.9;
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+              mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+    }
+    .pong-stage canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hero > *:not(.pong-stage) { position: relative; z-index: 1; }
+
+    /* Hero entrance: clip-reveal with focus pull */
+    .hero > .eyebrow-row,
+    .hero > h1,
+    .hero > p {
+      opacity: 0;
+      transform: translateY(18px);
+      filter: blur(6px);
+      transition:
+        opacity 0.9s var(--ease-out),
+        transform 0.9s var(--ease-out),
+        filter 0.9s var(--ease-out);
+    }
+    body.hero-loaded .hero > .eyebrow-row,
+    body.hero-loaded .hero > h1,
+    body.hero-loaded .hero > p {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+    body.hero-loaded .hero > .eyebrow-row { transition-delay: 0.05s; }
+    body.hero-loaded .hero > h1            { transition-delay: 0.18s; }
+    body.hero-loaded .hero > p             { transition-delay: 0.34s; }
+    body.hero-loaded .hero > p:nth-of-type(n+3) { transition-delay: 0.46s; }
+    body.hero-loaded .hero > p:nth-of-type(n+5) { transition-delay: 0.58s; }
+
+    .eyebrow-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: linear-gradient(120deg,
+        rgba(96,165,250,0.07), rgba(244,114,182,0.04), rgba(52,211,153,0.07));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.01em;
+    }
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #9af0a4;
+      box-shadow: 0 0 10px rgba(154,240,164,0.8);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .meta-clock {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    body.ko .meta-clock {
+      text-transform: none;
+      font-family: 'Pretendard', ui-monospace, monospace;
+      letter-spacing: 0.02em;
+    }
+    .meta-clock::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--soft);
+      opacity: 0.6;
+    }
+
+    .hero h1 {
+      margin: 0 0 22px;
+      font-size: clamp(2rem, 4.2vw, 3.4rem);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      max-width: 920px;
+      font-family: 'Fraunces', 'Inter', serif;
+      font-weight: 500;
+    }
+    body.ko .hero h1 {
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.32;
+    }
+    .hero h1 em {
+      position: relative;
+      font-style: italic;
+      display: inline-block;
+      padding: 0 0.08em 0 0.04em;
+      vertical-align: baseline;
+      background: linear-gradient(120deg, #c4b5fd 0%, #93c5fd 40%, #f0abfc 60%, #c4b5fd 100%);
+      background-size: 250% 100%;
+      background-position: 0% 50%;
+      -webkit-background-clip: text;
+              background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    body.hero-loaded .hero h1 em {
+      animation: shimmer 2.6s var(--ease-out) 0.7s 1 both;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    body.ko .hero h1 em {
+      font-style: normal;
+      font-weight: 800;
+      padding: 0 0.05em;
+    }
+
+    .lead, .intro {
+      max-width: 860px;
+      margin: 0 0 18px;
+      color: #d9d9dc;
+      font-size: 1.05rem;
+    }
+    .lead strong, .intro strong { color: #fff; font-weight: 600; }
+
+    /* ── Keyword ticker: a quiet stream of the research vocabulary ── */
+    .ticker {
+      position: relative;
+      margin: 8px 0 46px;
+      padding: 13px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .ticker-track {
+      display: inline-flex;
+      gap: 0;
+      white-space: nowrap;
+      will-change: transform;
+      animation: ticker 46s linear infinite;
+    }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    .ticker-track > span {
+      display: inline-flex;
+      align-items: center;
+      color: var(--soft);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    body.ko .ticker-track > span {
+      text-transform: none;
+      letter-spacing: 0.02em;
+      font-family: 'Pretendard', sans-serif;
+      font-size: 0.85rem;
+    }
+    .ticker-track > span::after {
+      content: "✦";
+      margin: 0 22px;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.22);
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .section { margin-top: 68px; }
+    .section:first-of-type { margin-top: 0; }
+
+    .section-title {
+      position: relative;
+      margin: 0 0 22px;
+      padding-bottom: 14px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-family: 'Fraunces', 'Inter', serif;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    body.ko .section-title {
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+    .section-title .num {
+      display: inline-block;
+      color: var(--soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.65em;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      font-style: normal;
+      font-variant-numeric: tabular-nums;
+      transition: color 1.2s var(--ease-out),
+                  text-shadow 1.2s var(--ease-out),
+                  transform 0.6s var(--ease-out);
+    }
+    .section.in-view .section-title .num {
+      color: rgb(var(--accent, 255 255 255));
+    }
+    .section-title.pulsed .num {
+      animation: num-pulse 1.4s ease-out;
+    }
+    @keyframes num-pulse {
+      0%   { text-shadow: 0 0 0 rgba(var(--accent), 0); transform: scale(1); }
+      18%  { text-shadow: 0 0 18px rgba(var(--accent), 0.65); transform: scale(1.08); }
+      100% { text-shadow: 0 0 0 rgba(var(--accent), 0); transform: scale(1); }
+    }
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(var(--accent, 255 255 255), 0.85), transparent);
+      transition: width 1.2s var(--ease-out);
+    }
+    .section.in-view .section-title::after { width: 80px; }
+
+    #education    { --accent: var(--c-education); }
+    #projects     { --accent: var(--c-projects); }
+    #awards       { --accent: var(--c-awards); }
+    #publications { --accent: var(--c-pubs); }
+    #patents      { --accent: var(--c-patents); }
+
+    .filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 0 0 22px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.025);
+      border-radius: 999px;
+      width: fit-content;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .filter button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.84rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color 0.2s ease, background 0.25s ease, transform 0.2s var(--ease-spring);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .filter button:hover { color: #fff; }
+    .filter button:active { transform: scale(0.95); }
+    .filter button .count {
+      font-size: 0.7rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-variant-numeric: tabular-nums;
+      color: var(--soft);
+      padding: 1px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      line-height: 1.5;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .filter button.active {
+      color: #0d1018;
+      background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+      font-weight: 600;
+    }
+    .filter button.active .count {
+      color: #0d1018;
+      border-color: rgba(13,16,24,0.25);
+    }
+
+    .items { display: grid; gap: 14px; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      filter: blur(4px);
+      transition:
+        opacity 0.8s var(--ease-out),
+        transform 0.8s var(--ease-out),
+        filter 0.8s var(--ease-out);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .item {
+      position: relative;
+      padding: 18px 20px 18px 22px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.025));
+      backdrop-filter: blur(16px) saturate(130%);
+      -webkit-backdrop-filter: blur(16px) saturate(130%);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+      transition: transform 0.3s var(--ease-spring),
+                  border-color 0.28s ease,
+                  background 0.28s ease,
+                  box-shadow 0.28s ease;
+    }
+    .item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 2px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      transition: background 0.3s ease, top 0.3s ease, bottom 0.3s ease, width 0.3s ease;
+    }
+    .item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(var(--accent, 255 255 255), 0.10), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(var(--accent, 255 255 255), 0.25);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.035));
+      box-shadow: 0 18px 42px rgba(0,0,0,0.22);
+    }
+    .item:hover::before {
+      background: linear-gradient(180deg,
+        rgba(var(--accent, 255 255 255), 0.9),
+        rgba(var(--accent, 255 255 255), 0.18));
+      top: 12px;
+      bottom: 12px;
+      width: 3px;
+    }
+    .item:hover::after { opacity: 1; }
+
+    .item.hidden { display: none; }
+
+    .item-title {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.02rem;
+      line-height: 1.45;
+      font-weight: 700;
+      letter-spacing: -0.012em;
+      color: #fff;
+    }
+    .item-meta {
+      margin-bottom: 10px;
+      color: var(--soft);
+      font-size: 0.84rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: 'tnum' 1, 'kern' 1;
+    }
+    body.ko .item-meta {
+      font-family: 'Pretendard', ui-monospace, monospace;
+      font-size: 0.85rem;
+    }
+    .item-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    ul.item-desc { padding-left: 18px; }
+    ul.item-desc li + li { margin-top: 6px; }
+
+    .paper-title,
+    .pub-author-me { color: #ffffff; }
+    .paper-title { font-weight: 600; }
+    .pub-author-me {
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .venue { color: var(--muted); font-style: italic; }
+    body.ko .venue { font-style: normal; color: var(--soft); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ */
+    .site-footer {
+      margin-top: 84px;
+      padding: 26px 0 34px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--soft);
+      font-size: 0.82rem;
+    }
+    .site-footer .ft-mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em;
+    }
+    .site-footer a {
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .site-footer a:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+    /* ═══════════════════════════════════════════════════════════
+       TOAST + KBD HINT
+       ═══════════════════════════════════════════════════════════ */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(20,20,24,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #fff;
+      font-size: 0.86rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s var(--ease-spring);
+      z-index: 200;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .kbd-hint {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(12,12,16,0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: var(--soft);
+      font-size: 0.76rem;
+      z-index: 50;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .kbd-hint.show { opacity: 1; transform: translateY(0); }
+    .kbd-hint kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 980px) {
+      .page {
+        width: min(var(--wrap), calc(100% - 24px));
+        padding-top: 18px;
+      }
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .sidebar {
+        position: static;
+        width: 100%;
+      }
+      .profile-image { max-width: 280px; }
+      .content { padding-top: 0; }
+      .section-nav { display: none; }
+      .kbd-hint { display: none; }
+      .top-controls {
+        top: 10px;
+        right: 10px;
+      }
+      .pill-btn {
+        padding: 7px 12px;
+        font-size: 0.78rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: calc(100% - 18px);
+      }
+      .mobile-nav {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        padding: 12px 4px 14px;
+        margin-bottom: 8px;
+        background: rgba(7,7,10,0.82);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        -webkit-overflow-scrolling: touch;
+      }
+      .mobile-nav::-webkit-scrollbar { display: none; }
+      .mobile-nav a {
+        position: relative;
+        color: var(--muted);
+        font-size: 0.88rem;
+        padding-bottom: 4px;
+        transition: color 0.2s ease;
+        flex-shrink: 0;
+      }
+      .mobile-nav a.active {
+        color: #fff;
+      }
+      .mobile-nav a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 1.5px;
+        background: linear-gradient(90deg, #60a5fa, #f472b6);
+        border-radius: 2px;
+      }
+
+      .hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+      .lead, .intro, .item-desc { font-size: 0.96rem; }
+      .two-col { grid-template-columns: 1fr; }
+      .item { padding: 16px 16px 16px 18px; }
+      .section { margin-top: 48px; }
+      .ticker { margin-bottom: 36px; }
+      .pong-stage { display: none; }
+      .site-footer { margin-top: 56px; }
+
+      .top-controls { gap: 6px; }
+      .pill-btn .label-text { display: none; }
+      .pill-btn {
+        padding: 8px;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+      }
+      .lang-toggle .label-text { display: inline !important; font-size: 0.78rem; }
+      .lang-toggle {
+        width: auto;
+        padding: 8px 12px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       READER (TTS) MODE
+       ═══════════════════════════════════════════════════════════ */
+    body.reader {
+      background: #f7f4ec !important;
+      color: #1a1a1a !important;
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif !important;
+      font-size: 18px;
+      line-height: 1.78;
+    }
+    body.reader.ko {
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif !important;
+      line-height: 1.85;
+    }
+    body.reader .aurora,
+    body.reader .ambient,
+    body.reader .grain,
+    body.reader .scroll-progress,
+    body.reader .kbd-hint,
+    body.reader .mobile-nav,
+    body.reader .filter,
+    body.reader .section-nav,
+    body.reader .profile-image,
+    body.reader .divider,
+    body.reader .eyebrow .dot,
+    body.reader .pong-stage,
+    body.reader .ticker,
+    body.reader .lab-fab,
+    body.reader .button {
+      display: none !important;
+    }
+    body.reader .page {
+      max-width: 700px;
+      padding: 80px 20px 60px;
+    }
+    body.reader .layout {
+      display: block;
+    }
+    body.reader .sidebar {
+      position: static;
+      width: 100%;
+      margin-bottom: 36px;
+    }
+    body.reader .profile-card {
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      padding: 0 !important;
+      transform: none !important;
+    }
+    body.reader .profile-card::before { display: none !important; }
+    body.reader .name {
+      color: #111 !important;
+      font-family: 'Fraunces', serif !important;
+      font-size: 2.4rem !important;
+      font-weight: 600;
+      margin-bottom: 10px !important;
+    }
+    body.reader.ko .name {
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif !important;
+    }
+    body.reader .role,
+    body.reader .org {
+      color: #555 !important;
+      font-style: italic;
+    }
+    body.reader.ko .role,
+    body.reader.ko .org { font-style: normal; }
+    body.reader .side-label {
+      color: #111 !important;
+      margin-top: 28px;
+      text-transform: none;
+      letter-spacing: 0.02em;
+      font-size: 0.95rem;
+    }
+    body.reader .side-list > div {
+      padding-left: 0 !important;
+      color: #333 !important;
+    }
+    body.reader .side-list > div::before { display: none !important; }
+    body.reader .contact-list {
+      gap: 4px;
+    }
+    body.reader .contact-list a {
+      color: #1a1a1a !important;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    body.reader .contact-list a::after { display: none !important; }
+    body.reader .eyebrow {
+      background: transparent !important;
+      border: 0 !important;
+      padding: 0 !important;
+      color: #555 !important;
+      font-style: italic;
+      font-size: 0.95rem !important;
+      margin-bottom: 14px !important;
+    }
+    body.reader.ko .eyebrow { font-style: normal; }
+    body.reader .hero h1 {
+      color: #111 !important;
+      font-family: 'Fraunces', serif !important;
+      font-weight: 600;
+      font-size: 2.2rem !important;
+    }
+    body.reader.ko .hero h1 {
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif !important;
+    }
+    body.reader .hero h1 em {
+      background: none !important;
+      -webkit-text-fill-color: #6d28d9 !important;
+      color: #6d28d9 !important;
+      margin-right: 0;
+    }
+    body.reader .lead,
+    body.reader .intro {
+      color: #2a2a2a !important;
+      max-width: 100%;
+      font-size: 1.05rem !important;
+    }
+    body.reader .lead strong,
+    body.reader .intro strong {
+      color: #111 !important;
+      font-weight: 600;
+    }
+    body.reader .section-title {
+      color: #111 !important;
+      border-bottom: 1px solid rgba(0,0,0,0.18) !important;
+      font-family: 'Fraunces', serif !important;
+      font-weight: 600;
+      font-size: 1.55rem !important;
+    }
+    body.reader.ko .section-title {
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif !important;
+    }
+    body.reader .section-title .num {
+      color: #777 !important;
+    }
+    body.reader .section-title::after { display: none !important; }
+    body.reader .items {
+      gap: 0;
+    }
+    body.reader .item,
+    body.reader .two-col .item {
+      background: transparent !important;
+      border: 0 !important;
+      border-bottom: 1px solid rgba(0,0,0,0.10) !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      padding: 16px 0 !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+    body.reader .two-col {
+      grid-template-columns: 1fr !important;
+      gap: 0 !important;
+    }
+    body.reader .item::before,
+    body.reader .item::after { display: none !important; }
+    body.reader .item-title {
+      color: #111 !important;
+      font-family: 'Fraunces', serif !important;
+      font-weight: 600;
+      font-size: 1.1rem !important;
+    }
+    body.reader.ko .item-title {
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif !important;
+    }
+    body.reader .item-meta {
+      color: #555 !important;
+      font-family: ui-monospace, monospace;
+      font-size: 0.85rem !important;
+    }
+    body.reader.ko .item-meta {
+      font-family: 'Pretendard', monospace;
+    }
+    body.reader .item-desc,
+    body.reader ul.item-desc {
+      color: #2a2a2a !important;
+      font-size: 1rem !important;
+    }
+    body.reader .pub-author-me,
+    body.reader .paper-title {
+      color: #111 !important;
+    }
+    body.reader .pub-author-me {
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    body.reader .venue {
+      color: #555 !important;
+    }
+    body.reader .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    body.reader .hero > * {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    body.reader .site-footer {
+      border-top-color: rgba(0,0,0,0.14);
+      color: #555 !important;
+    }
+    body.reader .site-footer a { color: #333 !important; border-color: rgba(0,0,0,0.3); }
+    body.reader .pill-btn {
+      background: rgba(255,255,255,0.95) !important;
+      color: #111 !important;
+      border-color: rgba(0,0,0,0.15) !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+    body.reader * {
+      animation: none !important;
+    }
+
+    /* Mobile: scale the whole page down so it fits smaller screens */
+    @media (max-width: 760px) {
+      html { font-size: 15px; }
+      .page { width: calc(100% - 22px); padding-top: 16px; }
+      .hero h1 { font-size: clamp(1.6rem, 7.2vw, 2.2rem); line-height: 1.22; margin-bottom: 16px; }
+      .name { font-size: 1.7rem; }
+      .lead, .intro { font-size: 0.92rem; }
+      .profile-image { max-width: 200px; margin-left: auto; margin-right: auto; }
+      .section { margin-top: 40px; }
+      .ticker { margin-bottom: 28px; }
+      .item { padding: 13px 14px 13px 16px; }
+      .item-title { font-size: 0.98rem; }
+      .section-title { font-size: 1.3rem; }
+    }
+    @media (max-width: 440px) {
+      html { font-size: 13.5px; }
+      .hero h1 { font-size: clamp(1.4rem, 8vw, 1.9rem); }
+      .name { font-size: 1.5rem; }
+      .profile-image { max-width: 168px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal { opacity: 1; transform: none; filter: none; }
+      .hero > * { opacity: 1 !important; transform: none !important; filter: none !important; }
+      .aurora, .ambient, .pong-stage { display: none; }
+      .ticker-track { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <div class="top-controls">
+    <button class="pill-btn lang-toggle" id="langToggle" aria-label="Toggle Korean / English">
+      <span class="label-text" id="langLabel">한국어</span>
+    </button>
+    <button class="pill-btn tts-toggle" id="ttsToggle" aria-pressed="false" aria-label="Toggle Reader Mode">
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 20 20"><path d="M4 6h12M4 10h12M4 14h7"/></svg>
+      </span>
+      <span class="label-text" id="ttsLabel" lang="en">Reader</span>
+      <span class="label-text" lang="ko">읽기 모드</span>
+    </button>
+  </div>
+
+  <a class="lab-fab" href="laboratory.html" aria-label="Open the Simulations hub">
+    <span class="icon" aria-hidden="true">
+      <svg viewBox="0 0 20 20"><path d="M8 2h4M9 2v5l-4.6 8.2a2 2 0 0 0 1.7 3h7.8a2 2 0 0 0 1.7-3L11 7V2"/></svg>
+    </span>
+    <span class="dot" aria-hidden="true"></span>
+    <span lang="en">Simulations</span><span lang="ko">시뮬레이션</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </a>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+  <div class="page">
+    <nav class="mobile-nav" aria-label="Sections">
+      <a href="#about"><span lang="en">About</span><span lang="ko">소개</span></a>
+      <a href="#education"><span lang="en">Education</span><span lang="ko">학력</span></a>
+      <a href="#projects"><span lang="en">Projects</span><span lang="ko">연구</span></a>
+      <a href="laboratory.html">Simulations</a>
+      <a href="#awards"><span lang="en">Awards</span><span lang="ko">수상</span></a>
+      <a href="#publications"><span lang="en">Publications</span><span lang="ko">논문</span></a>
+    </nav>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="profile-card" id="profileCard">
+          <div class="profile-image">
+            <img src="your-image.jpg" alt="Jihun Chae" onerror="this.onerror=null; this.parentElement.innerHTML='&lt;div class=&quot;profile-fallback&quot;&gt;Profile image&lt;/div&gt;';" />
+          </div>
+
+          <h2 class="name"><span lang="en">Jihun Chae</span><span lang="ko">채지훈</span></h2>
+          <p class="role"><span lang="en">Ph.D. Student</span><span lang="ko">박사과정</span></p>
+          <p class="org"><span lang="en">KAIST Graduate School of Culture Technology</span><span lang="ko">KAIST 문화기술대학원</span></p>
+
+          <div class="divider"></div>
+
+          <p class="side-label"><span lang="en">Research Fields</span><span lang="ko">연구 분야</span></p>
+          <div class="side-list" lang="en">
+            <div>Human-AI Interaction in Games</div>
+            <div>Generative AI in Games</div>
+            <div>Ludic AI &amp; Game Accessibility</div>
+          </div>
+          <div class="side-list" lang="ko">
+            <div>게임에서의 인간-AI 상호작용</div>
+            <div>게임에서의 생성형 AI</div>
+            <div>루딕 AI 및 게임 접근성</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <ul class="contact-list">
+            <li><a href="mailto:chaejihun@kaist.ac.kr" data-copy="chaejihun@kaist.ac.kr">✉ <span lang="en">Email</span><span lang="ko">이메일</span></a></li>
+            <li><a href="https://www.linkedin.com/in/jihun-chae-15457756/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://scholar.google.com/citations?user=OjxItRUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><span lang="en">Google Scholar</span><span lang="ko">구글 스칼라</span></a></li>
+            <li><a href="https://orcid.org/0009-0005-7425-3806" target="_blank" rel="noopener noreferrer">ORCID</a></li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <p class="side-label"><span lang="en">Sections</span><span lang="ko">섹션</span></p>
+          <nav class="section-nav" aria-label="Page sections">
+            <a href="#about" data-target="about"><span lang="en">About</span><span lang="ko">소개</span></a>
+            <a href="#education" data-target="education"><span lang="en">Education</span><span lang="ko">학력</span></a>
+            <a href="#projects" data-target="projects"><span lang="en">Projects</span><span lang="ko">연구 프로젝트</span></a>
+            <a href="laboratory.html"><span lang="en">Simulations</span><span lang="ko">시뮬레이션</span></a>
+            <a href="#awards" data-target="awards"><span lang="en">Awards</span><span lang="ko">수상</span></a>
+            <a href="#publications" data-target="publications"><span lang="en">Publications</span><span lang="ko">논문</span></a>
+            <a href="#patents" data-target="patents"><span lang="en">Patents</span><span lang="ko">특허</span></a>
+          </nav>
+
+          <a href="#publications" class="button" id="ctaButton">
+            <span lang="en">Explore Publications</span><span lang="ko">논문 보기</span> <span class="arrow">→</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="hero section" id="about">
+          <div class="pong-stage" aria-hidden="true">
+            <canvas id="pongCanvas"></canvas>
+          </div>
+          <div class="eyebrow-row">
+            <div class="eyebrow">
+              <span class="dot"></span>
+              <span lang="en">Human-AI Interaction · Play Experience · Inclusive AI</span>
+              <span lang="ko">인간-AI 상호작용 · 놀이 경험 · 포용적 AI</span>
+            </div>
+            <span class="meta-clock" id="liveClock" aria-live="off"></span>
+          </div>
+          <h1>
+            <span lang="en">Exploring what <em>play</em> becomes when AI enters our ludic space.</span>
+            <span lang="ko">AI가 우리의 유희 공간에 들어올 때, <em>놀이</em>는 어떻게 변하는가.</span>
+          </h1>
+          <p class="lead" lang="en">I research what it means to play with and against AI across games and leisure.</p>
+          <p class="lead" lang="ko">게임과 여가 전반에 걸쳐 AI와 함께, 또 AI에 맞서 노는 것이 무엇을 의미하는지를 연구합니다.</p>
+
+          <p class="intro" lang="en">Currently a Ph.D. student at KAIST GSCT, my research sits at the intersection of <strong>Human-AI Interaction</strong> and <strong>play experience</strong>. I am driven by the question: <strong>What changes when intelligent autonomous agents enter our ludic space?</strong> My expertise lies in designing and developing <strong>Inclusive AI agents</strong> that support a diverse range of players, including those with disabilities.</p>
+          <p class="intro" lang="ko">현재 KAIST 문화기술대학원 박사과정생으로, <strong>인간-AI 상호작용</strong>과 <strong>놀이 경험</strong>의 교차점에서 연구를 진행하고 있습니다. <strong>지능적 자율 에이전트가 우리의 유희 공간에 들어왔을 때 무엇이 변하는가?</strong>라는 물음이 저의 연구를 이끕니다. 장애가 있는 플레이어를 포함한 다양한 플레이어를 지원하는 <strong>포용적 AI 에이전트</strong>의 설계와 개발이 저의 주된 전문 분야입니다.</p>
+
+          <p class="intro" lang="en">Let's connect to discuss <strong>AI</strong>, <strong>HCI</strong>, and what <strong>the future of play</strong> will look like when autonomous agents evolve alongside us - and for those who come after.</p>
+          <p class="intro" lang="ko"><strong>AI</strong>, <strong>HCI</strong>, 그리고 자율적 에이전트가 우리와 함께, 또 우리 다음 세대를 위해 진화해 갈 때 <strong>놀이의 미래</strong>가 어떤 모습일지 함께 이야기 나누고 싶습니다.</p>
+        </section>
+
+        <div class="ticker" aria-hidden="true">
+          <div class="ticker-track" lang="en">
+            <span>Human-AI Interaction</span><span>Ludic AI</span><span>Game Accessibility</span><span>Play Experience</span><span>Inclusive Design</span><span>Generative Agents</span><span>Serious Games</span><span>XR Interfaces</span>
+            <span>Human-AI Interaction</span><span>Ludic AI</span><span>Game Accessibility</span><span>Play Experience</span><span>Inclusive Design</span><span>Generative Agents</span><span>Serious Games</span><span>XR Interfaces</span>
+          </div>
+          <div class="ticker-track" lang="ko">
+            <span>인간-AI 상호작용</span><span>루딕 AI</span><span>게임 접근성</span><span>놀이 경험</span><span>포용적 디자인</span><span>생성형 에이전트</span><span>시리어스 게임</span><span>XR 인터페이스</span>
+            <span>인간-AI 상호작용</span><span>루딕 AI</span><span>게임 접근성</span><span>놀이 경험</span><span>포용적 디자인</span><span>생성형 에이전트</span><span>시리어스 게임</span><span>XR 인터페이스</span>
+          </div>
+        </div>
+
+        <section class="section" id="education">
+          <h3 class="section-title"><span class="num">01</span><span lang="en">Education</span><span lang="ko">학력</span></h3>
+          <div class="items">
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Korea Advanced Institute of Science and Technology (KAIST)</span><span lang="ko">한국과학기술원 (KAIST)</span></span>
+              <div class="item-meta"><span lang="en"> | Ph.D. Student, Graduate School of Culture Technology</span><span lang="ko"> | 박사과정, 문화기술대학원</span></div>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Korea Advanced Institute of Science and Technology (KAIST)</span><span lang="ko">한국과학기술원 (KAIST)</span></span>
+              <div class="item-meta"><span lang="en"> | M.S., Graduate School of Culture Technology</span><span lang="ko"> | 석사, 문화기술대학원</span></div>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Handong Global University</span><span lang="ko">한동대학교</span></span>
+              <div class="item-meta"><span lang="en"> | B.A. in ICT Convergence &amp; Product Design</span><span lang="ko"> | ICT융합 및 제품디자인 학사</span></div>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Ateneo de Manila University</span><span lang="ko">아테네오 데 마닐라 대학교</span></span>
+              <div class="item-meta"><span lang="en"> | Management of Applied Chemistry</span><span lang="ko"> | 응용화학 경영 전공</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="projects">
+          <h3 class="section-title"><span class="num">02</span><span lang="en">Research Projects</span><span lang="ko">연구 프로젝트</span></h3>
+          <div class="items">
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Development and Evaluation of the Inclusive Conversational AI Service for Game Accessibility Enhancement</span><span lang="ko">게임 접근성 향상을 위한 포용적 대화형 AI 서비스의 개발 및 평가</span></span>
+              <div class="item-meta"><span lang="en">2024.05 – 2027.04 | KAIST | National Research Foundation of Korea (NRF) | Student Researcher Lead</span><span lang="ko">2024.05 ~ 2027.04 | KAIST | 한국연구재단 (NRF) | 학생연구원 (총괄)</span></div>
+              <ul class="item-desc" lang="en">
+                <li>Led user research and prototype development for an inclusive conversational AI assistant designed to support gamers with disabilities across diverse play contexts.</li>
+                <li>Conducted interviews, participatory design workshops, and iterative concept development to identify accessibility needs and translate them into AI-supported interaction scenarios.</li>
+                <li>Contributed to the design of a research and collaboration framework connecting academia, industry, and rehabilitation stakeholders to inform future accessibility guidelines and real-world deployment.</li>
+                <li>Collaborators: Samsung Electronics (Corporate Design Center), Nexon Intelligence Labs, Smilegate D&amp;I, Korea National Rehabilitation Center, and SpecialEffect (UK).</li>
+              </ul>
+              <ul class="item-desc" lang="ko">
+                <li>다양한 플레이 맥락에서 장애 게이머를 지원하기 위해 설계된 포용적 대화형 AI 어시스턴트의 사용자 연구 및 프로토타입 개발을 주도.</li>
+                <li>인터뷰, 참여형 디자인 워크숍, 반복적 콘셉트 개발을 통해 접근성 요구를 발굴하고 이를 AI 기반 상호작용 시나리오로 발전시킴.</li>
+                <li>학계, 산업계, 재활 분야의 이해관계자를 연결하는 연구·협력 프레임워크 설계에 기여하여 향후 접근성 가이드라인과 실제 적용에 기반을 마련.</li>
+                <li>협력 기관: 삼성전자 (코퍼레이트디자인센터), 넥슨 인텔리전스 랩, 스마일게이트 D&amp;I, 국립재활원, SpecialEffect (영국).</li>
+              </ul>
+            </div>
+
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Preserving the Haenyeo Legacy: Serious Games for Social Impact</span><span lang="ko">해녀 유산의 보존: 사회적 임팩트를 위한 시리어스 게임</span></span>
+              <div class="item-meta"><span lang="en">2025.06 – 2025.09 | KAIST | Leverhulme Trust International Fellow | Student Researcher</span><span lang="ko">2025.06 ~ 2025.09 | KAIST | Leverhulme Trust International Fellow | 학생연구원</span></div>
+              <ul class="item-desc" lang="en">
+                <li>Contributed to the design of a serious game project aimed at preserving and communicating the cultural heritage of the Jeju Haenyeo, with a focus on intergenerational knowledge transmission.</li>
+                <li>Helped develop game concepts and narrative structures that connect Haenyeo practices, environmental change, and women's community knowledge in an accessible interactive format.</li>
+                <li>Supported international research collaboration and field-based design discussions examining how serious games can contribute to cultural sustainability and community resilience.</li>
+                <li>Partners: Brunel University London (Games Research Lab), Jeju Haenyeo Museum, and the Haenyeo communities of Sinrye-ri, Daepyeong-ri, and Yeongnak-ri.</li>
+              </ul>
+              <ul class="item-desc" lang="ko">
+                <li>제주 해녀의 문화 유산을 보존하고 전달하기 위한 시리어스 게임 프로젝트 설계에 기여했으며, 세대 간 지식 전달에 중점을 둠.</li>
+                <li>해녀의 실천, 환경 변화, 여성 공동체의 지식을 접근 가능한 인터랙티브 형식으로 연결하는 게임 콘셉트 및 내러티브 구조 개발에 참여.</li>
+                <li>시리어스 게임이 문화적 지속가능성과 공동체 회복력에 어떻게 기여할 수 있는지를 살펴보는 국제 공동 연구와 현장 기반 디자인 논의를 지원.</li>
+                <li>협력 기관: 브루넬 대학교 런던 (Games Research Lab), 제주 해녀박물관, 신례리·대평리·영락리 해녀 공동체.</li>
+              </ul>
+            </div>
+
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Real-Time XR Interface Technology for Environmental Adaptation</span><span lang="ko">환경 적응을 위한 실시간 XR 인터페이스 기술</span></span>
+              <div class="item-meta"><span lang="en">2024.04 – 2025.06 | KAIST | Institute for Information &amp; Communication Technology Planning &amp; Evaluation (IITP) | Student Researcher</span><span lang="ko">2024.04 ~ 2025.06 | KAIST | 정보통신기획평가원 (IITP) | 학생연구원</span></div>
+              <ul class="item-desc" lang="en">
+                <li>Participated in the development of an XR interface system for dynamically adapting virtual content to real-world environmental and spatial conditions.</li>
+                <li>Contributed to the design and implementation of interaction concepts involving adaptive virtual objects and multimodal interface behavior in mixed-reality settings.</li>
+                <li>Supported research on immersive visual-haptic feedback to improve presence and environmental responsiveness in XR experiences.</li>
+                <li>Partners: Fraunhofer Institute (Germany), NYU, UniSA, Anipen, and bHaptics.</li>
+              </ul>
+              <ul class="item-desc" lang="ko">
+                <li>현실 환경 및 공간 조건에 가상 콘텐츠를 동적으로 적응시키는 XR 인터페이스 시스템 개발에 참여.</li>
+                <li>혼합현실 환경에서 적응형 가상 오브젝트와 멀티모달 인터페이스 행동을 포함하는 상호작용 콘셉트의 설계 및 구현에 기여.</li>
+                <li>XR 경험에서 현존감과 환경 반응성을 향상시키기 위한 몰입형 시각-햅틱 피드백 연구를 지원.</li>
+                <li>협력 기관: 프라운호퍼 연구소 (독일), NYU, UniSA, Anipen, bHaptics.</li>
+              </ul>
+            </div>
+
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Defense Technology Research: Camouflage Effectiveness</span><span lang="ko">국방 기술 연구: 위장 효과성</span></span>
+              <div class="item-meta"><span lang="en">2023.04 – 2024.02 | Handong Global University | Korea Aerospace Industries (KAI) | Student Researcher</span><span lang="ko">2023.04 ~ 2024.02 | 한동대학교 | 한국항공우주산업 (KAI) | 학생연구원</span></div>
+              <ul class="item-desc" lang="en">
+                <li>Performed computational and visual evaluation of KF-21 Boramae camouflage effectiveness across altitude, terrain, and meteorological conditions to assess detectability under varied operational environments.</li>
+                <li>Processed environmental imagery and simulation-based datasets to analyze the interaction between aircraft surface patterns, background context, and visibility performance.</li>
+                <li>Developed camouflage colorways and pattern configurations for applied defense design, with selected proposals incorporated into real project outputs.</li>
+              </ul>
+              <ul class="item-desc" lang="ko">
+                <li>고도, 지형, 기상 조건에 따른 KF-21 보라매의 위장 효과성에 대한 전산·시각 평가를 수행하여 다양한 운용 환경에서의 피탐성을 분석.</li>
+                <li>환경 영상과 시뮬레이션 기반 데이터를 처리하여 기체 표면 패턴, 배경 맥락, 시인성 간의 상호작용을 분석.</li>
+                <li>응용 국방 디자인을 위한 위장 컬러웨이 및 패턴 구성을 개발하였으며, 일부 제안은 실제 프로젝트 결과물에 반영됨.</li>
+              </ul>
+            </div>
+
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Smart City Infrastructure &amp; AI Object Tracking</span><span lang="ko">스마트시티 인프라 및 AI 객체 추적</span></span>
+              <div class="item-meta"><span lang="en">2023.01 – 2024.02 | Handong Global University | Student Researcher</span><span lang="ko">2023.01 ~ 2024.02 | 한동대학교 | 학생연구원</span></div>
+              <ul class="item-desc" lang="en">
+                <li>Engineered IoT-based roadside sensing hardware for urban data acquisition, including enclosure design and rapid prototyping through 3D-printed sensor housings.</li>
+                <li>Supported AI-driven traffic object tracking pipelines by contributing to data preprocessing, detection workflow refinement, and model-level optimization for real-world road scenes.</li>
+                <li>Improved detection robustness in dense urban environments through anchor-box optimization and applied computer vision experimentation for high-traffic conditions.</li>
+              </ul>
+              <ul class="item-desc" lang="ko">
+                <li>도시 데이터 수집을 위한 IoT 기반 도로변 센싱 하드웨어를 개발했으며, 3D 프린팅 센서 하우징을 활용한 인클로저 설계 및 신속한 프로토타이핑을 수행.</li>
+                <li>AI 기반 교통 객체 추적 파이프라인을 지원하여, 실제 도로 환경을 위한 데이터 전처리, 탐지 워크플로 개선, 모델 수준 최적화에 기여.</li>
+                <li>앵커 박스 최적화와 응용 컴퓨터 비전 실험을 통해 고밀도 도시 환경에서의 탐지 견고성을 향상.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="awards">
+          <h3 class="section-title"><span class="num">03</span><span lang="en">Honors &amp; Awards</span><span lang="ko">명예 및 수상</span></h3>
+          <div class="items">
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Grand Prize (최우수상) – Edu4.0 Q TA Activities</span><span lang="ko">최우수상 – Edu4.0 Q TA 활동</span></span>
+              <div class="item-meta"><span lang="en">2026.02 | KAIST</span><span lang="ko">2026.02 | KAIST</span></div>
+              <p class="item-desc" lang="en">Recognized for outstanding teaching support and excellence in presenting TA activity cases for the Edu4.0 Q model.</p>
+              <p class="item-desc" lang="ko">Edu4.0 Q 모델의 TA 활동 사례 발표에서 우수한 교육 지원과 발표 능력을 인정받음.</p>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Selected Entrepreneurial Team (Climate Tech)</span><span lang="ko">기후테크 부문 선정 창업팀</span></span>
+              <div class="item-meta"><span lang="en">2024.03 | Asan Nanum Foundation</span><span lang="ko">2024.03 | 아산나눔재단</span></div>
+              <p class="item-desc" lang="en">Selected through Chung Ju-yung Startup Competition &amp; Asan UniverCT as a representative startup team in the climate-tech track. Secured early-stage funding and mentorship through the KAIST and Asan Nanum Foundation ecosystem.</p>
+              <p class="item-desc" lang="ko">정주영 창업경진대회 및 아산 UniverCT에서 기후테크 트랙의 대표 창업팀으로 선정. KAIST와 아산나눔재단 생태계를 통해 초기 자금과 멘토링을 확보.</p>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Grand Prize (최우수상, 한동대학교 총장상) – HGU President's Award</span><span lang="ko">최우수상 (한동대학교 총장상)</span></span>
+              <div class="item-meta"><span lang="en">2024.01 | Pohang Culture &amp; Arts Factory Hackathon</span><span lang="ko">2024.01 | 포항 문화예술공장 해커톤</span></div>
+              <p class="item-desc" lang="en">Led the technical implementation of a large-scale Unreal Engine media facade prototype demonstrating a smart-city experience concept. Co-hosted by Pohang City, Pohang Cultural Foundation, KT, and Handong Global University.</p>
+              <p class="item-desc" lang="ko">스마트시티 경험 콘셉트를 시연하는 대규모 언리얼 엔진 미디어 파사드 프로토타입의 기술 구현을 주도. 포항시, 포항문화재단, KT, 한동대학교 공동 주최.</p>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Excellence Award (우수상)</span><span lang="ko">우수상</span></span>
+              <div class="item-meta"><span lang="en">2023.06 | National Metaverse Developer Contest (MSIT)</span><span lang="ko">2023.06 | 국가 메타버스 개발자 콘테스트 (과학기술정보통신부)</span></div>
+              <p class="item-desc" lang="en">Engineered a gamified digital therapeutic for eye muscle rehabilitation utilizing Meta Quest Pro's advanced eye-tracking capabilities. Recognized for innovation by the Korea Metaverse Industry Association and Skonec Entertainment, and awarded by the CEO of Skonec Entertainment.</p>
+              <p class="item-desc" lang="ko">메타 퀘스트 프로의 고급 시선추적 기능을 활용하여 눈 근육 재활을 위한 게이미피케이션 디지털 치료기기를 개발. 한국메타버스산업협회 및 스코넥엔터테인먼트로부터 혁신성을 인정받았으며, 스코넥엔터테인먼트 대표이사상을 수상.</p>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Outstanding Student Research Award (우수상)</span><span lang="ko">우수 학생 연구상</span></span>
+              <div class="item-meta"><span lang="en">2023.11 | Korea Multimedia Society (KMMS)</span><span lang="ko">2023.11 | 한국멀티미디어학회 (KMMS)</span></div>
+              <p class="item-desc" lang="en">Authored and presented research on eye-tracking-based VR interactive games, analyzing oculomotor responses to enhance immersion and accessibility in virtual environments.</p>
+              <p class="item-desc" lang="ko">시선추적 기반 VR 인터랙티브 게임 연구를 저술 및 발표. 가상 환경의 몰입감과 접근성 향상을 위한 안구 운동 반응을 분석.</p>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Handong Global University President's Award (한동대학교 총장상)</span><span lang="ko">한동대학교 총장상</span></span>
+              <div class="item-meta"><span lang="en">2022.11 | Handong Global University</span><span lang="ko">2022.11 | 한동대학교</span></div>
+              <p class="item-desc" lang="en">Startup Idea Competition. Conceptualized a high-impact startup business model integrating ESG principles with augmented reality technology, and the proposal was evaluated as the top entry for technical feasibility and social impact potential.</p>
+              <p class="item-desc" lang="ko">창업 아이디어 경진대회. ESG 원칙과 증강현실 기술을 결합한 임팩트 창업 비즈니스 모델을 구상하였으며, 기술적 실현 가능성과 사회적 영향력 측면에서 최우수 출품작으로 평가됨.</p>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Outstanding Student Research Award (우수상)</span><span lang="ko">우수 학생 연구상</span></span>
+              <div class="item-meta"><span lang="en">2022.05 | Korea Multimedia Society (KMMS)</span><span lang="ko">2022.05 | 한국멀티미디어학회 (KMMS)</span></div>
+              <p class="item-desc" lang="en">Conducted experimental research on VR exposure therapy for cynophobia, proposing novel spatiotemporal design factors to increase treatment efficacy.</p>
+              <p class="item-desc" lang="ko">개공포증을 위한 VR 노출 치료에 대한 실험 연구를 수행하였으며, 치료 효과를 높이기 위한 새로운 시공간 디자인 요소를 제안.</p>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Top 14 Finalist</span><span lang="ko">상위 14팀 진출</span></span>
+              <div class="item-meta"><span lang="en">2021.05 | Seoul National University (SNU) Business School</span><span lang="ko">2021.05 | 서울대학교 경영대학</span></div>
+              <p class="item-desc" lang="en">DB-SNUbiz Global Startup Challenge. Distinguished as a Top 14 finalist in a competitive global startup challenge with a prize pool of $91,000, pitching a blockchain-based solution to a panel of venture capitalists and industry experts.</p>
+              <p class="item-desc" lang="ko">DB-SNUbiz 글로벌 창업 챌린지. 총 상금 9만 1천 달러 규모의 경쟁 챌린지에서 상위 14팀에 진출하여, 벤처캐피털리스트와 산업 전문가 패널 앞에서 블록체인 기반 솔루션을 발표.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="publications">
+          <h3 class="section-title"><span class="num">04</span><span lang="en">Publications</span><span lang="ko">논문</span></h3>
+          <div class="filter" role="tablist" aria-label="Filter publications by year" id="pubFilter">
+            <button class="active" data-year="all" role="tab"><span lang="en">All</span><span lang="ko">전체</span></button>
+            <button data-year="2026" role="tab">2026</button>
+            <button data-year="2025" role="tab">2025</button>
+            <button data-year="2024" role="tab">2024</button>
+            <button data-year="2023" role="tab">2023</button>
+            <button data-year="2022" role="tab">2022</button>
+          </div>
+          <div class="items" id="pubItems">
+            <div class="item reveal" data-year="2026">
+              <p class="item-desc"><span class="pub-author-me">Chae, J.</span>, Seo, G., Jeong, S., &amp; Doh, Y. Y. (2026). <span class="paper-title">Design principles of Game AI Assistant (GAIA) for players with disabilities: Accessibility needs and ethical concerns.</span> <span class="venue">Proceedings of the 31st International Conference on Intelligent User Interfaces (IUI '26). ACM.</span></p>
+            </div>
+            <div class="item reveal" data-year="2025">
+              <p class="item-desc">Park, E., <span class="pub-author-me">Chae, J.</span>, Eum, K., Choi, E., Oh, H., &amp; Doh, Y. Y. (2025). <span class="paper-title">Press start to continue: A thematic analysis of the iterative process of hardcore players with disabilities adapting to gameplay difficulties.</span> <span class="venue">Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (CHI EA '25). ACM.</span> <span lang="en">Co-first Author.</span><span lang="ko">공동 제1저자.</span></p>
+            </div>
+            <div class="item reveal" data-year="2025">
+              <p class="item-desc"><span class="pub-author-me">Chae, J.</span>, &amp; Doh, Y. Y. (2025). <span class="paper-title">The identity and role of game NPCs: Past, present, and future.</span> <span class="venue">Proceedings of the 1st DiGRA Korea Conference 2025.</span></p>
+            </div>
+            <div class="item reveal" data-year="2025">
+              <p class="item-desc">Oh, H., Eum, K., Park, E., <span class="pub-author-me">Chae, J.</span>, Seo, J., Choi, E., &amp; Doh, Y. Y. (2025). <span class="paper-title">RAG-Enhanced LLM Chatbot for Game Accessibility: Development and Evaluation of GAIA.</span> <span class="venue">Korea HCI Conference 2025.</span> <span lang="en">Co-second Author.</span><span lang="ko">공동 제2저자.</span></p>
+            </div>
+            <div class="item reveal" data-year="2024">
+              <p class="item-desc">Choi, E., <span class="pub-author-me">Chae, J.</span>, &amp; Doh, Y. Y. (2024). <span class="paper-title">Prompting-Based LLM Framework for Ethical Decision-Making in the Trolley Dilemma: Embedding Hofstede's Cultural Dimensions Theory (PLETH).</span> <span class="venue">Korean Artificial Intelligence Association Conference 2024.</span> <span lang="en">Co-first Author.</span><span lang="ko">공동 제1저자.</span></p>
+            </div>
+            <div class="item reveal" data-year="2024">
+              <p class="item-desc">Eum, K., Park, E., <span class="pub-author-me">Chae, J.</span>, &amp; Doh, Y. Y. (2024). <span class="paper-title">GAIA: A game AI assistant service framework integrating problem-solving and emotion regulation strategies.</span> <span class="venue">Korea Computer Graphics Society Conference 2024.</span> <span lang="en">Co-first Author.</span><span lang="ko">공동 제1저자.</span></p>
+            </div>
+            <div class="item reveal" data-year="2024">
+              <p class="item-desc">Park, E., <span class="pub-author-me">Chae, J.</span>, Kim, K., Yi, H. W., Lootah, M. K., &amp; Doh, Y. Y. (2024). <span class="paper-title">Challenges and opportunities of game NPC research using LLM: A scoping review.</span> <span class="venue">Korean Game Society Conference 2024.</span> <span lang="en">Co-first Author.</span><span lang="ko">공동 제1저자.</span></p>
+            </div>
+            <div class="item reveal" data-year="2024">
+              <p class="item-desc">Kim, Y. B., &amp; <span class="pub-author-me">Chae, J.</span> (2024). <span class="paper-title">A technical literature review of distributed management structure: Focusing on the multi-label system of HYBE Co., Ltd.</span> <span class="venue">Korea Technology Innovation Society Conference 2024.</span></p>
+            </div>
+            <div class="item reveal" data-year="2024">
+              <p class="item-desc">Kim, Y. B., &amp; <span class="pub-author-me">Chae, J.</span> (2024). <span class="paper-title">From BigHit to HYBE: Sentiment analysis and strategic transition through news data.</span> <span class="venue">Korea Society for Innovation Management &amp; Economics Conference 2024.</span></p>
+            </div>
+            <div class="item reveal" data-year="2023">
+              <p class="item-desc"><span class="pub-author-me">Chae, J.</span>, Yoo, S., Lee, Y., Kim, Y., Kim, H., &amp; Han, D. (2023). <span class="paper-title">Analysis of the effects of positive and negative VR game contents on enhancing environmental awareness based on self-reliant and team-based play styles.</span> <span class="venue">Journal of the Korea Computer Graphics Society, 29(3), 137–147.</span></p>
+            </div>
+            <div class="item reveal" data-year="2023">
+              <p class="item-desc"><span class="pub-author-me">Chae, J.</span>, Kim, H., Kim, Y., Kim, M., Kim, S., &amp; Han, D. (2023). <span class="paper-title">A study on the effect of group commitment on improving awareness of recycling through gamification.</span> <span class="venue">Korea HCI Conference 2023.</span></p>
+            </div>
+            <div class="item reveal" data-year="2023">
+              <p class="item-desc">Kim, Y., <span class="pub-author-me">Chae, J.</span>, Lee, Y., Kim, H., Lee, Y., &amp; Han, D. (2023). <span class="paper-title">Enhancing participation in rehabilitation for diplopia through gamification.</span> <span class="venue">Korea Computer Graphics Society Conference 2023.</span></p>
+            </div>
+            <div class="item reveal" data-year="2023">
+              <p class="item-desc">Lee, Y. S., Kim, Y., Kim, H., <span class="pub-author-me">Chae, J.</span>, Lee, Y., &amp; Han, D. (2023). <span class="paper-title">Eye-tracking-based VR interactive games for eye movements.</span> <span class="venue">Korea Multimedia Society Conference 2023.</span></p>
+            </div>
+            <div class="item reveal" data-year="2023">
+              <p class="item-desc">Yoon, D., Park, S., Song, Y., <span class="pub-author-me">Chae, J.</span>, &amp; Chung, D. (2023). <span class="paper-title">Methodology for improving the performance of demand forecasting through machine learning.</span> <span class="venue">Preprint available at Research Square.</span></p>
+            </div>
+            <div class="item reveal" data-year="2022">
+              <p class="item-desc">Yoo, S., <span class="pub-author-me">Chae, J.</span>, Kim, H., Lee, Y., Kim, S., Kim, Y., &amp; Han, S. (2022). <span class="paper-title">Explored systematic exposure methods influenced by spatiotemporal factors in VR treatment for cynophobia.</span> <span class="venue">Korea Multimedia Society Conference 2022.</span></p>
+            </div>
+            <div class="item reveal" data-year="2022">
+              <p class="item-desc">Park, S., Yoon, D., <span class="pub-author-me">Chae, J.</span>, Song, Y., &amp; Chung, D. (2022). <span class="paper-title">Enhanced predictive model performance through clustering.</span> <span class="venue">Korea Society of Management Information Systems Conference 2022.</span></p>
+            </div>
+            <div class="item reveal" data-year="2022">
+              <p class="item-desc">Park, S., Yoon, D., Song, Y., <span class="pub-author-me">Chae, J.</span>, &amp; Chung, D. (2022). <span class="paper-title">Combined regression coefficient reduction method with clustering for performance enhancement.</span> <span class="venue">Korea Intelligent Information Systems Society Conference 2022.</span></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="patents">
+          <h3 class="section-title"><span class="num">05</span><span lang="en">Patents &amp; Certifications</span><span lang="ko">특허 및 자격증</span></h3>
+          <div class="two-col">
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">Artificial Intelligence-Based Technology Acceptance Prediction Method, Program, and Device</span><span lang="ko">인공지능 기반 기술 수용 예측 방법, 프로그램 및 장치</span></span>
+              <div class="item-meta"><span lang="en">2022.12 | Korean Intellectual Property Office | Patent Application Publication No. 40-2022-0179493</span><span lang="ko">2022.12 | 특허청 | 출원 공개 번호 40-2022-0179493</span></div>
+              <p class="item-desc" lang="en">Co-Patentor: Impactive AI Corp. Publication Date: December 23, 2022.</p>
+              <p class="item-desc" lang="ko">공동 출원인: Impactive AI Corp. 공개일: 2022년 12월 23일.</p>
+            </div>
+            <div class="item reveal">
+              <span class="item-title"><span lang="en">AI-900: Microsoft Azure, Machine Learning, and AI</span><span lang="ko">AI-900: Microsoft Azure, 머신러닝 및 AI</span></span>
+              <div class="item-meta"><span lang="en">Certification | Microsoft</span><span lang="ko">자격증 | Microsoft</span></div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="site-footer">
+          <span>
+            <span lang="en">© 2026 Jihun Chae · KAIST Graduate School of Culture Technology</span>
+            <span lang="ko">© 2026 채지훈 · KAIST 문화기술대학원</span>
+          </span>
+          <span class="ft-mono" id="pongScoreLine" title="Two agents have been playing in the hero since you arrived.">
+            <span lang="en">AI vs AI · 0 : 0</span>
+            <span lang="ko">AI 대 AI · 0 : 0</span>
+          </span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <div class="kbd-hint" id="kbdHint">
+    <kbd>J</kbd><kbd>K</kbd> sections · <kbd>L</kbd> lang · <kbd>R</kbd> reader
+  </div>
+
+  <script>
+    (function () {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isTouch = matchMedia('(hover: none)').matches;
+
+      // ── Ambient grid follows cursor ────────────────────────
+      let rafG = null;
+      window.addEventListener('pointermove', (e) => {
+        if (rafG) return;
+        rafG = requestAnimationFrame(() => {
+          document.body.style.setProperty('--gx', e.clientX + 'px');
+          document.body.style.setProperty('--gy', e.clientY + 'px');
+          rafG = null;
+        });
+      }, { passive: true });
+
+      let usedTouch = false;
+      window.addEventListener('touchstart', () => {
+        if (!usedTouch) {
+          usedTouch = true;
+          document.body.classList.add('no-cursor');
+        }
+      }, { passive: true });
+
+      // ── Cursor spotlight on cards ──────────────────────────
+      document.querySelectorAll('.item, .profile-card, .button').forEach((el) => {
+        el.addEventListener('pointermove', (e) => {
+          const rect = el.getBoundingClientRect();
+          el.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width) * 100 + '%');
+          el.style.setProperty('--my', ((e.clientY - rect.top) / rect.height) * 100 + '%');
+        }, { passive: true });
+      });
+
+      // ── 3D tilt on profile card ────────────────────────────
+      const card = document.getElementById('profileCard');
+      if (card && !prefersReduced && !isTouch) {
+        let pending = false;
+        card.addEventListener('pointermove', (e) => {
+          if (pending) return;
+          pending = true;
+          requestAnimationFrame(() => {
+            const rect = card.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width;
+            const py = (e.clientY - rect.top) / rect.height;
+            const rx = (0.5 - py) * 4;
+            const ry = (px - 0.5) * 4;
+            card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+            pending = false;
+          });
+        });
+        card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+      }
+
+      // ── Magnetic CTA button ────────────────────────────────
+      const cta = document.getElementById('ctaButton');
+      if (cta && !prefersReduced && !isTouch) {
+        cta.addEventListener('pointermove', (e) => {
+          const rect = cta.getBoundingClientRect();
+          const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.15;
+          const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.25;
+          cta.style.transform = `translate(${dx}px, ${dy - 2}px)`;
+        });
+        cta.addEventListener('pointerleave', () => { cta.style.transform = ''; });
+      }
+
+      // ── Scroll progress bar ────────────────────────────────
+      const progress = document.getElementById('scrollProgress');
+      const updateProgress = () => {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+        progress.style.width = Math.max(0, Math.min(1, scrolled)) * 100 + '%';
+      };
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      // ── Reveal + Section in-view ───────────────────────────
+      const revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !prefersReduced) {
+        const revealIO = new IntersectionObserver((entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              entry.target.style.transitionDelay = (i * 60) + 'ms';
+              entry.target.classList.add('visible');
+              revealIO.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach((el) => revealIO.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add('visible'));
+      }
+
+      const sections = document.querySelectorAll('.section');
+      if ('IntersectionObserver' in window) {
+        const sectionIO = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add('in-view');
+          });
+        }, { threshold: 0.05 });
+        sections.forEach((s) => sectionIO.observe(s));
+
+        const navLinks = document.querySelectorAll('.section-nav a, .mobile-nav a');
+        const setActive = (id) => {
+          navLinks.forEach((a) => {
+            const href = a.getAttribute('href');
+            a.classList.toggle('active', href === '#' + id);
+          });
+        };
+        const spyIO = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          if (visible[0]) setActive(visible[0].target.id);
+        }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+        sections.forEach((s) => spyIO.observe(s));
+      }
+
+      // ── Copy email + toast ─────────────────────────────────
+      const toast = document.getElementById('toast');
+      let toastTimer = null;
+      const showToast = (msg) => {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+      };
+      document.querySelectorAll('[data-copy]').forEach((el) => {
+        el.addEventListener('click', async (e) => {
+          const value = el.getAttribute('data-copy');
+          try {
+            e.preventDefault();
+            await navigator.clipboard.writeText(value);
+            el.classList.add('copied');
+            const isKo = document.body.classList.contains('ko');
+            showToast((isKo ? '이메일 복사됨 - ' : 'Email copied - ') + value);
+            setTimeout(() => el.classList.remove('copied'), 1800);
+          } catch {
+            window.location.href = el.getAttribute('href');
+          }
+        });
+      });
+
+      // ── Publication filter (+ per-year counts) ─────────────
+      const filter = document.getElementById('pubFilter');
+      const pubItems = document.querySelectorAll('#pubItems .item');
+      if (filter) {
+        // Counts encode real information: how many entries each tab holds.
+        filter.querySelectorAll('button').forEach((btn) => {
+          const year = btn.dataset.year;
+          const n = year === 'all'
+            ? pubItems.length
+            : [...pubItems].filter((it) => it.dataset.year === year).length;
+          const badge = document.createElement('span');
+          badge.className = 'count';
+          badge.textContent = n;
+          btn.appendChild(badge);
+        });
+
+        filter.addEventListener('click', (e) => {
+          const btn = e.target.closest('button');
+          if (!btn) return;
+          filter.querySelectorAll('button').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          const year = btn.dataset.year;
+          pubItems.forEach((it) => {
+            it.classList.toggle('hidden', !(year === 'all' || it.dataset.year === year));
+          });
+        });
+      }
+
+      // ── Reader / TTS toggle ────────────────────────────────
+      const ttsBtn = document.getElementById('ttsToggle');
+      const setReader = (on) => {
+        document.body.classList.toggle('reader', on);
+        ttsBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        const enLabel = ttsBtn.querySelector('[lang="en"]');
+        const koLabel = ttsBtn.querySelector('[lang="ko"]');
+        if (enLabel) enLabel.textContent = on ? 'Visual' : 'Reader';
+        if (koLabel) koLabel.textContent = on ? '시각 모드' : '읽기 모드';
+        try { localStorage.setItem('reader-mode', on ? '1' : '0'); } catch {}
+      };
+      try {
+        if (localStorage.getItem('reader-mode') === '1') setReader(true);
+      } catch {}
+      ttsBtn.addEventListener('click', () => {
+        setReader(!document.body.classList.contains('reader'));
+      });
+
+      // ── Language toggle ───────────────────────────────────
+      // English is always the default on first landing - no persistence.
+      const langBtn = document.getElementById('langToggle');
+      const langLabel = document.getElementById('langLabel');
+      const setLang = (ko) => {
+        document.body.classList.toggle('ko', ko);
+        document.documentElement.lang = ko ? 'ko' : 'en';
+        langLabel.textContent = ko ? 'English' : '한국어';
+      };
+      langBtn.addEventListener('click', () => {
+        setLang(!document.body.classList.contains('ko'));
+      });
+
+      // ── Keyboard shortcuts ─────────────────────────────────
+      const sectionIds = ['about', 'education', 'projects', 'awards', 'publications', 'patents'];
+      const currentSectionIndex = () => {
+        const y = window.scrollY + window.innerHeight * 0.35;
+        let best = 0;
+        sectionIds.forEach((id, i) => {
+          const el = document.getElementById(id);
+          if (el && el.offsetTop <= y) best = i;
+        });
+        return best;
+      };
+      window.addEventListener('keydown', (e) => {
+        const tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || e.metaKey || e.ctrlKey || e.altKey) return;
+        const k = e.key.toLowerCase();
+        if (k === 'j') {
+          const idx = Math.min(sectionIds.length - 1, currentSectionIndex() + 1);
+          document.getElementById(sectionIds[idx]).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (k === 'k') {
+          const idx = Math.max(0, currentSectionIndex() - 1);
+          document.getElementById(sectionIds[idx]).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (k === 'g') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (k === 'r') {
+          setReader(!document.body.classList.contains('reader'));
+        } else if (k === 'l') {
+          setLang(!document.body.classList.contains('ko'));
+        }
+      });
+
+      const hint = document.getElementById('kbdHint');
+      if (hint && !isTouch && window.innerWidth > 980) {
+        setTimeout(() => hint.classList.add('show'), 1200);
+        setTimeout(() => hint.classList.remove('show'), 6800);
+      }
+
+      // ── Live Daejeon clock (updates every 30s) ─────────────
+      const clockEl = document.getElementById('liveClock');
+      const updateClock = () => {
+        const opts = { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hour12: false };
+        const time = new Date().toLocaleTimeString('en-US', opts);
+        const isKo = document.body.classList.contains('ko');
+        clockEl.textContent = (isKo ? '대전' : 'Daejeon') + ' · ' + time + (isKo ? '' : ' KST');
+      };
+      updateClock();
+      setInterval(updateClock, 30000);
+      langBtn.addEventListener('click', () => setTimeout(updateClock, 0));
+
+      // ── Hero entrance: stagger on first paint ────────────
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.body.classList.add('hero-loaded');
+        });
+      });
+
+      // ── Anchor click → pulse destination section title ────
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener('click', () => {
+          const id = a.getAttribute('href').slice(1);
+          if (!id) return;
+          const section = document.getElementById(id);
+          if (!section) return;
+          const title = section.querySelector('.section-title');
+          if (!title) return;
+          setTimeout(() => {
+            title.classList.remove('pulsed');
+            void title.offsetWidth;
+            title.classList.add('pulsed');
+            setTimeout(() => title.classList.remove('pulsed'), 1500);
+          }, 500);
+        });
+      });
+
+      /* ═════════════════════════════════════════════════════
+         SIGNATURE: THE ENDLESS MATCH
+         Two autonomous agents quietly playing in the hero -
+         the research question, rendered: what changes when
+         agents enter our ludic space? They were here first.
+         ═════════════════════════════════════════════════════ */
+      const pongCanvas = document.getElementById('pongCanvas');
+      if (pongCanvas && !prefersReduced) {
+        const ctx = pongCanvas.getContext('2d');
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        let W = 0, H = 0, raf = null, visible = true;
+
+        const G = {
+          ball: { x: 0, y: 0, vx: 0, vy: 0, trail: [] },
+          L: { y: 0, vy: 0, err: 0 },   // left agent
+          R: { y: 0, vy: 0, err: 0 },   // right agent
+          score: [0, 0],
+          paddleH: 70,
+          serveTimer: 0
+        };
+
+        const scoreLine = document.getElementById('pongScoreLine');
+        const updateScoreLine = () => {
+          if (!scoreLine) return;
+          const en = scoreLine.querySelector('[lang="en"]');
+          const ko = scoreLine.querySelector('[lang="ko"]');
+          if (en) en.textContent = 'AI vs AI · ' + G.score[0] + ' : ' + G.score[1];
+          if (ko) ko.textContent = 'AI 대 AI · ' + G.score[0] + ' : ' + G.score[1];
+        };
+
+        const resize = () => {
+          const r = pongCanvas.parentElement.getBoundingClientRect();
+          W = r.width; H = r.height;
+          pongCanvas.width = W * dpr;
+          pongCanvas.height = H * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          G.paddleH = Math.max(54, Math.min(90, H * 0.16));
+          if (!G.ball.vx) serve(Math.random() < 0.5 ? -1 : 1);
+        };
+
+        const serve = (dir) => {
+          G.ball.x = W / 2;
+          G.ball.y = H * (0.3 + Math.random() * 0.4);
+          const speed = Math.max(2.1, W / 520);
+          const angle = (Math.random() * 0.6 - 0.3);
+          G.ball.vx = Math.cos(angle) * speed * dir;
+          G.ball.vy = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.8;
+          G.ball.trail = [];
+          // each agent re-rolls its imperfection on every serve
+          G.L.err = (Math.random() - 0.5) * G.paddleH * 1.3;
+          G.R.err = (Math.random() - 0.5) * G.paddleH * 1.3;
+        };
+
+        const step = () => {
+          const b = G.ball;
+          b.x += b.vx; b.y += b.vy;
+          b.trail.push({ x: b.x, y: b.y });
+          if (b.trail.length > 14) b.trail.shift();
+
+          if (b.y < 6 || b.y > H - 6) { b.vy *= -1; b.y = Math.max(6, Math.min(H - 6, b.y)); }
+
+          // Agents: ease toward the ball with deliberate imperfection
+          const chase = (P, targetActive) => {
+            const target = targetActive ? b.y + P.err : H / 2;
+            P.vy += (target - P.y) * 0.012;
+            P.vy *= 0.88;
+            P.y += P.vy;
+            P.y = Math.max(G.paddleH / 2 + 4, Math.min(H - G.paddleH / 2 - 4, P.y));
+          };
+          chase(G.L, b.vx < 0);
+          chase(G.R, b.vx > 0);
+
+          const padX = 14;
+          const hit = (P, x, dir) => {
+            if (Math.abs(b.x - x) < 8 && b.vx * dir < 0 &&
+                Math.abs(b.y - P.y) < G.paddleH / 2 + 6) {
+              b.vx = Math.abs(b.vx) * dir * 1.03;
+              b.vy += (b.y - P.y) * 0.06;
+              b.vx = Math.max(-5.5, Math.min(5.5, b.vx));
+              P.err = (Math.random() - 0.5) * G.paddleH * 1.3;
+            }
+          };
+          hit(G.L, padX, 1);
+          hit(G.R, W - padX, -1);
+
+          if (b.x < -20) { G.score[1]++; updateScoreLine(); serve(1); }
+          if (b.x > W + 20) { G.score[0]++; updateScoreLine(); serve(-1); }
+        };
+
+        const draw = () => {
+          ctx.clearRect(0, 0, W, H);
+
+          // faint center line
+          ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+          ctx.setLineDash([3, 9]);
+          ctx.beginPath();
+          ctx.moveTo(W / 2, 8);
+          ctx.lineTo(W / 2, H - 8);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // trail
+          G.ball.trail.forEach((p, i) => {
+            const a = (i / G.ball.trail.length) * 0.10;
+            ctx.fillStyle = 'rgba(165,180,252,' + a.toFixed(3) + ')';
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          // ball
+          ctx.fillStyle = 'rgba(196,181,253,0.34)';
+          ctx.beginPath();
+          ctx.arc(G.ball.x, G.ball.y, 3, 0, Math.PI * 2);
+          ctx.fill();
+
+          // paddles
+          const padX = 14;
+          ctx.fillStyle = 'rgba(255,255,255,0.13)';
+          const drawPad = (x, y) => {
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(x - 1.5, y - G.paddleH / 2, 3, G.paddleH, 2);
+            else ctx.rect(x - 1.5, y - G.paddleH / 2, 3, G.paddleH);
+            ctx.fill();
+          };
+          drawPad(padX, G.L.y);
+          drawPad(W - padX, G.R.y);
+
+          // tiny score, mono
+          ctx.fillStyle = 'rgba(255,255,255,0.10)';
+          ctx.font = '600 11px ui-monospace, SFMono-Regular, Menlo, monospace';
+          ctx.textAlign = 'right';
+          ctx.fillText(String(G.score[0]).padStart(2, '0'), W / 2 - 16, 18);
+          ctx.textAlign = 'left';
+          ctx.fillText(String(G.score[1]).padStart(2, '0'), W / 2 + 16, 18);
+        };
+
+        const loop = () => {
+          if (visible && !document.hidden && !document.body.classList.contains('reader')) {
+            step();
+            draw();
+          }
+          raf = requestAnimationFrame(loop);
+        };
+
+        // pause work when hero is off-screen
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver((entries) => {
+            visible = entries[0].isIntersecting;
+          }, { threshold: 0 }).observe(pongCanvas);
+        }
+
+        G.L.y = G.R.y = 100;
+        resize();
+        window.addEventListener('resize', resize, { passive: true });
+        loop();
+      }
+    })();
+  </script>
+</body>
+</html>
