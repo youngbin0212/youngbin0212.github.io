@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Young Bin Kim — M.S. student at KAIST (UVR Lab) researching AR/VR/MR, HCI/UX, and spatial AR experience." />
+  <meta name="description" content="Young Bin Kim, M.S. student at KAIST (UVR Lab) researching AR/VR/MR, HCI/UX, and spatial AR experience." />
   <title>Young Bin Kim | KAIST UVR Lab</title>
+  <meta name="theme-color" content="#c2683f" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
@@ -24,6 +25,8 @@
       --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
       --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
       --mono: ui-monospace, SFMono-Regular, Menlo, 'Cascadia Mono', monospace;
+      --accent: #c2683f;     /* terracotta (warm) */
+      --accent-2: #5b7a5b;   /* sage (cool) */
     }
 
     * { box-sizing: border-box; }
@@ -195,7 +198,8 @@
     }
     .section-nav a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
     .section-nav a.active { color: var(--ink); padding-left: 20px; }
-    .section-nav a.active::before { background: var(--ink); width: 11px; height: 1.5px; border-radius: 2px; }
+    .section-nav a.active { color: var(--accent); }
+    .section-nav a.active::before { background: var(--accent); width: 11px; height: 1.5px; border-radius: 2px; }
 
     .cv-btn {
       display: block; width: 100%; text-align: center;
@@ -226,7 +230,7 @@
     }
     .eyebrow .dot {
       width: 6px; height: 6px; border-radius: 999px;
-      background: #45b389; box-shadow: 0 0 8px rgba(69,179,137,0.7);
+      background: var(--accent); box-shadow: 0 0 8px rgba(194,104,63,0.6);
     }
     .meta-clock {
       display: inline-flex; align-items: center; gap: 7px;
@@ -250,7 +254,7 @@
     /* AR detection brackets + label on hover (cards) */
     .section-card::before, .profile-card::before {
       content: ""; position: absolute; inset: 9px; border-radius: 12px;
-      border: 1.5px solid rgba(17,17,20,0.42);
+      border: 1.5px solid var(--accent);
       opacity: 0; pointer-events: none;
       transition: opacity 0.25s var(--ease), inset 0.25s var(--ease);
       -webkit-mask:
@@ -268,7 +272,7 @@
       content: "◳ TRACKED";
       position: absolute; bottom: 12px; right: 16px;
       font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.08em;
-      color: rgba(17,17,20,0.42); white-space: nowrap;
+      color: var(--accent); white-space: nowrap;
       opacity: 0; transform: translateY(-3px); pointer-events: none;
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
@@ -294,7 +298,7 @@
     }
     .section-num {
       font-family: var(--mono);
-      font-size: 0.68rem; color: var(--soft); margin-left: auto;
+      font-size: 0.68rem; color: var(--accent); margin-left: auto;
     }
 
     /* About */
@@ -333,6 +337,8 @@
       text-transform: uppercase; letter-spacing: 0.06em;
       vertical-align: middle; margin-left: 7px;
     }
+    .badge.badge-ongoing { background: rgba(91,122,91,0.16); color: #4a684a; }
+    .badge.badge-course  { background: rgba(194,104,63,0.15); color: #a8552f; }
 
     .pub-me { font-weight: 700; }
     .pub-title { font-style: italic; }
@@ -341,20 +347,31 @@
     .empty-note { color: var(--muted); font-size: 0.9rem; margin: 4px 0 0; }
 
     .group-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-family: var(--mono);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--soft);
-      margin: 22px 0 6px;
+      margin: 22px 0 8px;
     }
-    .group-label:first-child { margin-top: 0; }
+    .group-label::before {
+      content: "";
+      width: 8px; height: 8px; border-radius: 999px;
+      background: currentColor;
+    }
+    .group-label.research { color: var(--accent-2); }
+    .group-label.course   { color: var(--accent); }
+    .group-label:first-of-type { margin-top: 0; }
     .item-body a {
-      color: var(--ink);
-      border-bottom: 1px solid var(--rule);
+      color: var(--accent);
+      border-bottom: 1px solid rgba(194,104,63,0.35);
       transition: border-color 0.18s ease;
     }
-    .item-body a:hover { border-color: var(--ink2); }
+    .item-body a:hover { border-color: var(--accent); }
 
     /* ── Footer ── */
     .footer {
@@ -571,6 +588,7 @@
                   <span class="item-date">– 2019</span>
                 </div>
                 <div class="item-sub">Honolulu, Hawaii, USA</div>
+                <p class="item-body">Graduated <em>Summa Cum Laude</em>.</p>
               </div>
             </div>
           </div>
@@ -631,38 +649,38 @@
               <span class="section-num">03</span>
             </div>
 
-            <div class="group-label">Research</div>
+            <div class="group-label research">Research</div>
             <div class="items">
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">WISE UI <span class="badge">Ongoing</span></span>
+                  <span class="item-title">WISE UI <span class="badge badge-ongoing">Ongoing</span></span>
                   <span class="item-date">2025</span>
                 </div>
                 <div class="item-sub">KAIST UVR Lab · Augmented Space-Time team</div>
                 <ul class="item-body">
-                  <li>A platform that brings a shared UI to everyone using AR glasses — reconstructing the surrounding space and the user’s location at a consistent level in any environment, estimating integrated attention from physical cues together with the user’s personal traits and nearby objects, and enabling organic, personalized information augmentation and interaction across diverse spaces.</li>
-                  <li><strong>My role:</strong> on-device (HMD) recognition and tracking of everyday objects around the user — building an efficient system that lightens tracking by leveraging the user’s actions (grasp / gaze).</li>
+                  <li>A platform that brings a shared UI to everyone using AR glasses. It reconstructs the surrounding space and the user’s location at a consistent level in any environment, estimates integrated attention from physical cues together with the user’s personal traits and nearby objects, and enables organic, personalized information augmentation and interaction across diverse spaces.</li>
+                  <li><strong>My role:</strong> On-device (HMD) recognition and tracking of everyday objects around the user. Built an efficient system that lightens tracking by leveraging the user’s actions (grasp / gaze).</li>
                 </ul>
               </div>
             </div>
 
-            <div class="group-label">Coursework</div>
+            <div class="group-label course">Coursework</div>
             <div class="items">
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">K Demon Stress Hunters <span class="badge">Course</span></span>
+                  <span class="item-title">K-Demon Stress Hunters <span class="badge badge-course">Course</span></span>
                   <span class="item-date">2025 Fall</span>
                 </div>
                 <div class="item-sub">MV6000 · Augmented Reality Project · KAIST</div>
                 <ul class="item-body">
-                  <li>A K-Culture-based AR system for implicit stress relief through play. A three-stage embodied interaction (Affect Labeling → Externalization → Relational Healing) lets users objectify negative emotions and resolve them through playful manipulation, drawing on Korean motifs (Moon Jar, folk paintings, <em>Jeong</em>). A pilot study showed increased positive affect and reduced state anxiety and stress. <em>(First author)</em></li>
+                  <li>A K-Culture-based AR system for implicit stress relief through play. A three-stage embodied interaction (Affect Labeling, Externalization, and Relational Healing) lets users objectify negative emotions and resolve them through playful manipulation, drawing on Korean motifs (Moon Jar, folk paintings, <em>Jeong</em>). A pilot study showed increased positive affect and reduced state anxiety and stress. <em>(First author)</em></li>
                   <li><a href="https://www.youtube.com/watch?v=r3VlDy17Ygo" target="_blank" rel="noopener">Demo video ↗</a> (Korean)</li>
                 </ul>
               </div>
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">3D Interaction Design — “Short-cut” <span class="badge">Course</span></span>
-                  <span class="item-date">2025</span>
+                  <span class="item-title">ASL (American Sign Language)-based Shortcut Gesture for 3D Interaction <span class="badge badge-course">Course</span></span>
+                  <span class="item-date">2026 Spring</span>
                 </div>
                 <div class="item-sub">GCT555 · 3D Interaction Design · KAIST</div>
                 <ul class="item-body">
@@ -673,10 +691,10 @@
               </div>
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">AR Exhibition: Architectural Elements Augmentation <span class="badge">Course</span></span>
+                  <span class="item-title">AR Exhibition: Architectural Elements Augmentation <span class="badge badge-course">Course</span></span>
                   <span class="item-date">2025 Summer</span>
                 </div>
-                <div class="item-sub">CTP445 / GCT545 · Augmented Reality · KAIST</div>
+                <div class="item-sub">CTP445 · Augmented Reality · KAIST</div>
                 <ul class="item-body">
                   <li>Course project that led to a poster at <strong>ISMAR 2025</strong> (see Publications).</li>
                 </ul>
@@ -695,7 +713,7 @@
             <div class="items">
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">Grand Prize · HGU President’s Award — Pohang Culture &amp; Arts Factory Hackathon</span>
+                  <span class="item-title">Grand Prize · HGU President’s Award, Pohang Culture &amp; Arts Factory Hackathon</span>
                   <span class="item-date">2024.01</span>
                 </div>
                 <div class="item-sub">City of Pohang · Coding Ground · Handong Global University</div>
@@ -703,18 +721,18 @@
               </div>
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">Creativity Award — Metaverse Asset Idea Contest</span>
+                  <span class="item-title">Creativity Award, Metaverse Asset Idea Contest</span>
                   <span class="item-date">2023.12</span>
                 </div>
                 <div class="item-sub">Korea Electronics Technology Institute (KETI) · Dept. of Art &amp; Technology, Seokyeong University</div>
               </div>
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">Excellence Award — Metaverse Contest</span>
+                  <span class="item-title">Excellence Award, Metaverse Contest</span>
                   <span class="item-date">2023.11</span>
                 </div>
                 <div class="item-sub">Convergence and Open Sharing System (COSS), Ministry of Education, Republic of Korea</div>
-                <p class="item-body">Designed <em>Legend of XR in the Metaverse of Madness</em>, a fantasy-themed XR training experience in Unity — learners acquire XR studio skills through three progressive stages of immersive gameplay.</p>
+                <p class="item-body">Designed <em>Legend of XR in the Metaverse of Madness</em>, a fantasy-themed XR training experience in Unity where learners acquire XR studio skills through three progressive stages of immersive gameplay.</p>
               </div>
             </div>
           </div>
