@@ -314,7 +314,7 @@
     .item-title { font-size: 0.96rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; }
     .item-date {
       font-family: var(--mono);
-      font-size: 0.66rem; color: var(--soft); white-space: nowrap;
+      font-size: 0.78rem; color: var(--muted); white-space: nowrap;
     }
     .item-sub {
       font-family: var(--serif);
@@ -339,6 +339,22 @@
     .pub-venue { color: var(--muted); font-size: 0.83rem; }
 
     .empty-note { color: var(--muted); font-size: 0.9rem; margin: 4px 0 0; }
+
+    .group-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--soft);
+      margin: 22px 0 6px;
+    }
+    .group-label:first-child { margin-top: 0; }
+    .item-body a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--rule);
+      transition: border-color 0.18s ease;
+    }
+    .item-body a:hover { border-color: var(--ink2); }
 
     /* ── Footer ── */
     .footer {
@@ -552,7 +568,7 @@
               <div class="item">
                 <div class="item-head">
                   <span class="item-title">Moanalua High School</span>
-                  <span class="item-date">– 2019.05</span>
+                  <span class="item-date">– 2019</span>
                 </div>
                 <div class="item-sub">Honolulu, Hawaii, USA</div>
               </div>
@@ -611,89 +627,58 @@
         <section class="section" id="projects">
           <div class="section-card glass fade-up">
             <div class="section-head">
-              <h2>Research Projects</h2>
+              <h2>Projects</h2>
               <span class="section-num">03</span>
             </div>
+
+            <div class="group-label">Research</div>
             <div class="items">
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">Dynamic Functional Scene Graph for AR Glasses <span class="badge">Ongoing</span></span>
-                  <span class="item-date">20XX – Present</span>
+                  <span class="item-title">WISE UI <span class="badge">Ongoing</span></span>
+                  <span class="item-date">2025 – Present</span>
                 </div>
-                <div class="item-sub">KAIST</div>
+                <div class="item-sub">KAIST UVR Lab · Augmented Space-Time team</div>
                 <ul class="item-body">
-                  <li>Real-time scene graph for AR glasses with HOI-driven event inference for on-device state consistency.</li>
-                  <li>LLM-based condition evaluation and affordance reasoning over Node/Edge JSON structure.</li>
-                  <li>Server-client split (Unity/Python, WebSocket) with multiple simultaneous camera streams.</li>
-                  <li>V-JEPA 2 for interaction detection; LLM for condition/affordance inference.</li>
+                  <li>A platform that brings a shared UI to everyone using AR glasses — reconstructing the surrounding space and the user’s location at a consistent level in any environment, estimating integrated attention from physical cues together with the user’s personal traits and nearby objects, and enabling organic, personalized information augmentation and interaction across diverse spaces.</li>
+                  <li><strong>My role:</strong> on-device (HMD) recognition and tracking of everyday objects around the user — building an efficient system that lightens tracking by leveraging the user’s actions (grasp / gaze).</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="group-label">Coursework</div>
+            <div class="items">
+              <div class="item">
+                <div class="item-head">
+                  <span class="item-title">K Demon Stress Hunters <span class="badge">Course</span></span>
+                  <span class="item-date">2025 Fall</span>
+                </div>
+                <div class="item-sub">MV6000 · Augmented Reality Project · KAIST</div>
+                <ul class="item-body">
+                  <li>A K-Culture-based AR system for implicit stress relief through play. A three-stage embodied interaction (Affect Labeling → Externalization → Relational Healing) lets users objectify negative emotions and resolve them through playful manipulation, drawing on Korean motifs (Moon Jar, folk paintings, <em>Jeong</em>). A pilot study showed increased positive affect and reduced state anxiety and stress. <em>(First author)</em></li>
+                  <li><a href="https://www.youtube.com/watch?v=r3VlDy17Ygo" target="_blank" rel="noopener">Demo video ↗</a> (Korean)</li>
                 </ul>
               </div>
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">Beginner–Expert Collaborative AR Assembly Guidance <span class="badge">Ongoing</span></span>
-                  <span class="item-date">20XX – Present</span>
+                  <span class="item-title">3D Interaction Design — “Short-cut” <span class="badge">Course</span></span>
+                  <span class="item-date">2025</span>
                 </div>
-                <div class="item-sub">KAIST</div>
+                <div class="item-sub">GCT555 · 3D Interaction Design · KAIST</div>
                 <ul class="item-body">
-                  <li>AR interface bridging novice–expert skill gaps during physical assembly tasks.</li>
-                  <li>Split LED wall layout + multi-state feedback design from expert interviews.</li>
-                  <li>Grounded in 3D interaction principles: intuitiveness, cost-effectiveness, user controllability.</li>
+                  <li>2D shortcuts like Ctrl+C / V are universal, but 3D interfaces have no shared gesture vocabulary yet. <em>Short-cut</em> introduces a familiar, intuitive 3D shortcut system that maps Ctrl+C / F / Z / X directly to ASL finger-spelling gestures.</li>
+                  <li>A camera tracks both hands in real time and recognizes Copy / Find / Undo / Delete (distinguishing left and right hands); users then select and place blocks in 3D space with a pinch interaction, with real-time visual feedback on match status.</li>
+                  <li><a href="https://testgreen.my.canva.site/3did-team3-webpage" target="_blank" rel="noopener">Project website ↗</a></li>
                 </ul>
               </div>
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">K-Culture Inspired AR Wellness Application</span>
-                  <span class="item-date">20XX – 20XX</span>
+                  <span class="item-title">AR Exhibition: Architectural Elements Augmentation <span class="badge">Course</span></span>
+                  <span class="item-date">2025 Summer</span>
                 </div>
-                <div class="item-sub">KAIST</div>
+                <div class="item-sub">CTP445 / GCT545 · Augmented Reality · KAIST</div>
                 <ul class="item-body">
-                  <li>AR wellness experience integrating 백자, 민화, jeong (정) into emotionally resonant interaction.</li>
-                  <li>달항아리 (Moon Jar) metaphor for affect labeling and emotional externalization.</li>
-                  <li>Collaborative healing mechanics for interpersonal closeness in collocated MR.</li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Collaborative MR Telepresence System</span>
-                  <span class="item-date">20XX – 20XX</span>
-                </div>
-                <div class="item-sub">KAIST · Meta Quest 3 + Unity + MRUK</div>
-                <ul class="item-body">
-                  <li>Shared physical-virtual spaces across remote locations; UDP networking + LED wall control.</li>
-                  <li>Custom occlusion shaders; multiplayer avatar sync via Netcode for GameObjects.</li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">6D Object Pose Estimation &amp; CAD-Free Tracking</span>
-                  <span class="item-date">20XX – 20XX</span>
-                </div>
-                <div class="item-sub">KAIST</div>
-                <ul class="item-body">
-                  <li>Benchmarked GoTrack, FoundationPose, RGBTrack for AR object registration.</li>
-                  <li>Shape retrieval for CAD-free tracking using DINOv2 features.</li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Physiological Synchrony Visualization in VR</span>
-                  <span class="item-date">20XX – 20XX</span>
-                </div>
-                <div class="item-sub">KAIST</div>
-                <ul class="item-body">
-                  <li>Compared avatar-, object-, and space-oriented paradigms for physiological synchrony visualization.</li>
-                  <li>Object-oriented (virtual tree) showed strongest effect on interpersonal closeness.</li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Egocentric Video Understanding: VOST &amp; HoGraph</span>
-                  <span class="item-date">20XX – 20XX</span>
-                </div>
-                <div class="item-sub">KAIST</div>
-                <ul class="item-body">
-                  <li>VOST-based segmentation (AOT+ baseline) on custom ISMAR26/EgoPTG dataset.</li>
-                  <li>HoGraph evaluation: Temporal Event Detection F1 + Graph Topology Edge F1.</li>
+                  <li>Course project that led to a poster at <strong>ISMAR 2025</strong> (see Publications).</li>
                 </ul>
               </div>
             </div>

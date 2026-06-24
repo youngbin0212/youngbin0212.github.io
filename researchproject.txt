@@ -1,0 +1,45 @@
+[연구]
+WISE UI
+- wise ui에 대한 설명~~
+        편집
+        - 3단계 목표
+        [전체] AR Glasses 활용하는 모든 사람들이 활용할 수 있는 UI 구성
+        임의의 공간에서도 동일한 수준으로 주변 공간과 나의 위치를 복원
+        물리적 주의 그리고 사용자 개인의 특징과 주변 객체의 특징을 반영한 통합적 주의를 추정
+        더욱 다양한 공간에서 개인화된 사용자 모델을 바탕으로 유기적인 정보증강 및 인터랙션을 할 수 있는 플랫폼 제공
+
+- 여기서 내가 맡은 부분 설명: 모바일(HMD)에서 사용자 주변의 일상 물체 인식 및 추적
+        -팀구성
+        Augmented Space-Time: 전진우, 김영빈, 김병현 ##여기에서 내가 맡은 것은 HMD에 객체를 인식하고 tracking 할 때 사용자의 action(grasp/gaze)를 활용하여서 tracking을 가볍게 할 수 있는 효율적인 시스템 구현
+        Wise Interfece: 이현진, 송은화, 서현서
+        Mediated Experience: 조우진, 방선영, 장석성
+
+
+
+
+DT 2.0(이거는 연구 과제 확정은 아닌데 해도 되나..?)
+
+
+[코스웍]
+2025 여름 학기 CTP445/GCT545	증강현실
+이걸로 이즈마 포스터 냈고
+
+2025 가을 학기 MV6000	증강현실 프로젝트  - K 데몬 스트레스 헌터스
+https://www.youtube.com/watch?v=r3VlDy17Ygo (데모 영상인데 한국어버전이긴해)
+#최종 리포트: supplies/ARP_VR_poster.pdf
+
+
+
+GCT555	3D Interaction Design 
+여기서 short-cut 했는데 https://testgreen.my.canva.site/3did-team3-webpage 이게 웹사이트 
+        #최종발표에서 대본 앞부분을 가져왔어 파악하기에는 쉬울 거야
+        In 2D interfaces, shortcuts like Ctrl+C and Ctrl+V are universally understood across all platforms and devices. 
+        But in 3D interfaces, no such shared vocabulary exists yet.
+        Every platform defines its own gestures, leading to fragmented experiences.
+        On top of that, the closest existing system from TVCG 2025 only handles 2D text editing. 
+        There's simply no system designed for object manipulation using 3D shortcut-based gestures. That's the gap we're addressing. 
+        So what do we need? A 3D shortcut system that's familiar, intuitive, and universal: building on 2D knowledge and applicable to any shortcut rather than arbitrary mappings. 
+        Our solution maps Ctrl+C, F, Z, X directly to ASL finger-spelling gestures for those letters. Simple, learnable, and grounded in an existing system. 
+        Here's how the system works end-to-end. A camera captures both hands in real time. The system recognizes the gesture, whether Copy, Find, Undo, or Delete, distinguishing left and right hands for command processing. Once recognized, users select and place blocks in 3D space with a pinch interaction. The arrangement updates in real time, with visual feedback indicating match status throughout. 
+
+
