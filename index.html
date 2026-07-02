@@ -122,7 +122,7 @@
     }
 
     .profile-image {
-      width: 100%;
+      width: 84%;
       max-width: 100%;
       margin: 0 auto 20px;
       aspect-ratio: 4 / 5;
@@ -264,6 +264,8 @@
       font-weight: 500; letter-spacing: -0.02em; line-height: 1.28;
       color: var(--ink);
     }
+    .hero-statement strong { color: var(--accent); font-weight: 600; font-style: italic; }
+    .hero-statement strong.alt { color: var(--accent-2); }
     .ph { color: var(--soft); font-weight: inherit; }
 
     .section { margin-bottom: 16px; }
@@ -287,23 +289,7 @@
     }
     .section-card:hover::before, .profile-card:hover::before { opacity: 1; inset: 6px; }
 
-    .section-card::after, .profile-card::after {
-      content: "◳ TRACKED";
-      position: absolute; bottom: 12px; right: 16px;
-      font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.08em;
-      color: var(--accent); white-space: nowrap;
-      opacity: 0; transform: translateY(-3px); pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    .section-card:hover::after, .profile-card:hover::after { opacity: 1; transform: translateY(0); }
-
-    #about       .section-card::after { content: "◳ TRACKED 0.99"; }
-    #education   .section-card::after { content: "◳ TRACKED 0.97"; }
-    #projects    .section-card::after { content: "◳ TRACKED 0.95"; }
-    #awards      .section-card::after { content: "◳ TRACKED 0.92"; }
-    #publications .section-card::after { content: "◳ TRACKED 0.98"; }
-    #patents     .section-card::after { content: "◳ TRACKED 0.90"; }
-    .profile-card::after { content: "◳ PERSON 0.99"; bottom: 14px; right: 18px; }
+    .section-card::after, .profile-card::after { display: none; }
 
     .section-head {
       display: flex; align-items: baseline; gap: 12px;
@@ -324,6 +310,13 @@
     .lead { font-size: 1rem; color: var(--ink2); margin: 0 0 12px; }
     .intro { font-size: 0.92rem; color: var(--muted); margin: 0; line-height: 1.75; }
     .intro strong, .lead strong { color: var(--ink2); font-weight: 600; }
+    .intro a, .lead a {
+      color: var(--accent);
+      border-bottom: 1px solid rgba(194,104,63,0.35);
+      transition: border-color 0.18s ease;
+    }
+    .intro a:hover, .lead a:hover { border-color: var(--accent); }
+    .intro a strong, .lead a strong { color: inherit; }
 
     /* Items */
     .items { display: grid; gap: 4px; }
@@ -516,9 +509,9 @@
 
           <div class="side-label">Research Fields</div>
           <div class="side-list">
-            <div>AR / VR / MR</div>
-            <div>Human-Computer Interaction &amp; UX</div>
-            <div>Spatial Experience &amp; Exhibition</div>
+            <div>Augmented Reality</div>
+            <div>Virtual Reality</div>
+            <div>Spatial Computing</div>
           </div>
 
           <div class="divider"></div>
@@ -539,6 +532,7 @@
             <a href="#projects">Projects</a>
             <a href="#awards">Awards</a>
             <a href="#patents">Patents</a>
+            <a href="#activities">Activities</a>
           </nav>
 
           <!-- CV: cv.pdf 파일을 같은 폴더에 넣으면 활성화. 없으면 이 줄 삭제
@@ -556,11 +550,11 @@
           <div class="eyebrow-row">
             <span class="eyebrow">
               <span class="dot"></span>
-              <span class="ph">[ 연구 키워드 · 키워드 · 키워드 ]</span>
+              <span>Augmented Reality · Virtual Reality · Spatial Computing</span>
             </span>
             <span class="meta-clock">Daejeon · <span id="kstClock">--:--</span> KST</span>
           </div>
-          <h2 class="hero-statement"><span class="ph">[ 한 줄 소개 문구를 여기에 ]</span></h2>
+          <h2 class="hero-statement">Exploring how information can <strong>live</strong> in space and <strong class="alt">respond</strong> to what we do.</h2>
         </header>
 
         <!-- About -->
@@ -570,9 +564,9 @@
               <h2>About</h2>
               <span class="section-num">00</span>
             </div>
-            <p class="lead">I research augmented and virtual reality systems that connect physical spaces, artworks, and people through ubiquitous computing.</p>
+            <p class="lead">I research augmented and virtual reality systems that connect physical spaces, and people through ubiquitous computing.</p>
             <p class="intro">
-              I am an M.S. student in the <strong>UVR Lab</strong> at KAIST, advised by Prof. <strong>Woontack Woo</strong>. My work spans <strong>AR exhibition and spatial experience</strong>, augmenting architectural elements from 2D artworks, and studying <strong>user experience and VR comfort</strong> through behavioral analysis.
+              I am an M.S. student in the <a href="https://uvrlab.org/" target="_blank" rel="noopener"><strong>UVR Lab</strong></a> at KAIST, advised by Prof. <strong>Woontack Woo</strong>. My work spans <strong>real-time 6DoF tracking of hand-held objects</strong> on standalone headsets, and <strong>interaction-driven techniques</strong> that let a user's behavior control how the system runs.
             </p>
           </div>
         </section>
@@ -677,7 +671,7 @@
                 <div class="item-sub">KAIST UVR Lab · Augmented Space-Time team</div>
                 <ul class="item-body">
                   <li>A platform that brings a shared UI to everyone using AR glasses. It reconstructs the surrounding space and the user’s location at a consistent level in any environment, estimates integrated attention from physical cues together with the user’s personal traits and nearby objects, and enables organic, personalized information augmentation and interaction across diverse spaces.</li>
-                  <li><strong>My role:</strong> On-device (HMD) recognition and tracking of everyday objects around the user. Built an efficient system that lightens tracking by leveraging the user’s actions (grasp / gaze).</li>
+                  <li><strong>My role:</strong> As part of the Augmented Space-Time team, I focused on recognizing the augmented space and its detailed objects. I built an efficient on-device (HMD) system that tracks everyday objects around the user.</li>
                 </ul>
               </div>
             </div>
@@ -686,12 +680,12 @@
             <div class="items">
               <div class="item">
                 <div class="item-head">
-                  <span class="item-title">K-Demon Stress Hunters <span class="badge badge-course">Course</span></span>
+                  <span class="item-title">K-Culture Stress Hunters <span class="badge badge-course">Course</span></span>
                   <span class="item-date">2025 Fall</span>
                 </div>
                 <div class="item-sub">MV6000 · Augmented Reality Project · KAIST</div>
                 <ul class="item-body">
-                  <li>A K-Culture-based AR system for implicit stress relief through play. A three-stage embodied interaction (Affect Labeling, Externalization, and Relational Healing) lets users objectify negative emotions and resolve them through playful manipulation, drawing on Korean motifs (Moon Jar, folk paintings, <em>Jeong</em>). A pilot study showed increased positive affect and reduced state anxiety and stress. <em>(First author)</em></li>
+                  <li>A K-Culture-based AR system for implicit stress relief through play. A three-stage embodied interaction (Affect Labeling, Externalization, and Relational Healing) lets users objectify negative emotions and resolve them through playful manipulation, drawing on Korean motifs (Moon Jar, folk paintings, <em>Jeong</em> 情). A pilot study showed increased positive affect and reduced state anxiety and stress. <em>(First author)</em></li>
                   <li><a href="https://www.youtube.com/watch?v=r3VlDy17Ygo" target="_blank" rel="noopener">Demo video ↗</a> (Korean)</li>
                 </ul>
               </div>
@@ -702,7 +696,7 @@
                 </div>
                 <div class="item-sub">GCT555 · 3D Interaction Design · KAIST</div>
                 <ul class="item-body">
-                  <li>2D shortcuts like Ctrl+C / V are universal, but 3D interfaces have no shared gesture vocabulary yet. <em>Short-cut</em> introduces a familiar, intuitive 3D shortcut system that maps Ctrl+C / F / Z / X directly to ASL finger-spelling gestures.</li>
+                  <li>2D keyboard shortcuts like Ctrl+C / V are universal, but 3D interfaces have no shared gesture vocabulary yet. <em>Short-cut</em> introduces a familiar, intuitive 3D shortcut system that maps Ctrl+C / F / Z / X directly to ASL finger-spelling gestures.</li>
                   <li>A camera tracks both hands in real time and recognizes Copy / Find / Undo / Delete (distinguishing left and right hands); users then select and place blocks in 3D space with a pinch interaction, with real-time visual feedback on match status.</li>
                   <li><a href="https://testgreen.my.canva.site/3did-team3-webpage" target="_blank" rel="noopener">Project website ↗</a></li>
                 </ul>
@@ -714,7 +708,56 @@
                 </div>
                 <div class="item-sub">CTP445 · Augmented Reality · KAIST</div>
                 <ul class="item-body">
+                  <li>A spatial augmentation system for AR exhibitions that immersively reinterprets 2D artworks. Taking an artwork image (e.g., Raphael’s <em>The School of Athens</em> on an LED wall) as input, it generates floor patterns and architectural 3D models and semantically aligns them with the physical space, giving visitors the feeling of actually stepping inside the painting.</li>
                   <li>Course project that led to a poster at <strong>ISMAR 2025</strong> (see Publications).</li>
+                  <li><a href="https://www.youtube.com/watch?v=j61Wwzv6-z8" target="_blank" rel="noopener">Demo video ↗</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="group-label research">Undergraduate</div>
+            <div class="items">
+              <div class="item">
+                <div class="item-head">
+                  <span class="item-title">Media Facade: “Under the Pohang Sea”</span>
+                  <span class="item-date">2024</span>
+                </div>
+                <div class="item-sub">Pohang Buk-gu District Office · Unreal Engine</div>
+                <ul class="item-body">
+                  <li>An underwater media facade video for the Pohang Buk-gu District Office building on the theme “Change, Leap, and Hope.” <strong>My role:</strong> wrote the scenario and built the visuals and effects (water, marine life, lighting, shaders) in Unreal Engine.</li>
+                  <li>Grand Prize (HGU President’s Award), Pohang Media Facade Hackathon (see Awards). <a href="https://drive.google.com/file/d/1lDA7brPElYurYxzpVdliflBsYmjG3cZL/view" target="_blank" rel="noopener">Demo video ↗</a></li>
+                </ul>
+              </div>
+              <div class="item">
+                <div class="item-head">
+                  <span class="item-title">EasyDizzy</span>
+                  <span class="item-date">2023</span>
+                </div>
+                <div class="item-sub">VR motion-sickness adaptation game</div>
+                <ul class="item-body">
+                  <li>A first-person VR running game that helps players adapt to motion sickness via a <em>progressive overload</em> system. <strong>My role:</strong> designed and developed the game and the adaptation system.</li>
+                  <li><a href="https://www.youtube.com/watch?v=psEi4tKPDoI" target="_blank" rel="noopener">Demo video ↗</a></li>
+                </ul>
+              </div>
+              <div class="item">
+                <div class="item-head">
+                  <span class="item-title">Legend of XR in the Metaverse of Madness</span>
+                  <span class="item-date">2023</span>
+                </div>
+                <div class="item-sub">XR-studio training VR content · Unity · Team Lead</div>
+                <ul class="item-body">
+                  <li>A Unity VR experience that recreates an XR studio in the metaverse so anyone can try virtual-production, played out as a three-quest story across two maps. <strong>My role (team lead):</strong> led the team and built the characters, VR interactions, and intro cinematic.</li>
+                  <li>Excellence Award, 3rd COSS Metaverse Contest (see Awards). <a href="https://www.youtube.com/watch?v=6277QEabWss" target="_blank" rel="noopener">Demo video ↗</a></li>
+                </ul>
+              </div>
+              <div class="item">
+                <div class="item-head">
+                  <span class="item-title">Handong University Metaverse</span>
+                  <span class="item-date">2022</span>
+                </div>
+                <div class="item-sub">Virtual campus platform · Unity</div>
+                <ul class="item-body">
+                  <li>A virtual Handong University campus in Unity, 3D-modeled from drone footage, letting students and visitors explore the campus and join activities online. <strong>My role:</strong> built the platform structure, character interactions, and multi-user networking, and managed the project.</li>
                 </ul>
               </div>
             </div>
@@ -735,7 +778,7 @@
                   <span class="item-date">2024.01</span>
                 </div>
                 <div class="item-sub">City of Pohang · Coding Ground · Handong Global University</div>
-                <p class="item-body">Developed a media facade showcase video (“Sea”) using Unreal Engine.</p>
+                <p class="item-body">Developed a media facade showcase video (“Under the Sea”) using Unreal Engine.</p>
               </div>
               <div class="item">
                 <div class="item-head">
@@ -770,6 +813,39 @@
                   <span class="item-date">Certification</span>
                 </div>
                 <div class="item-sub">Microsoft</div>
+              </div>
+              <div class="item">
+                <div class="item-head">
+                  <span class="item-title">Unity Game Engine Camp</span>
+                  <span class="item-date">2023.07</span>
+                </div>
+                <div class="item-sub">Handong Global University</div>
+              </div>
+              <div class="item">
+                <div class="item-head">
+                  <span class="item-title">Unreal Engine Training Camp</span>
+                  <span class="item-date">2023.12</span>
+                </div>
+                <div class="item-sub">Pohang Media Facade Camp · Hosted by the City of Pohang · Organized by KT, Handong Global University, WNCW &amp; Coding Ground</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Activities -->
+        <section class="section" id="activities">
+          <div class="section-card glass fade-up">
+            <div class="section-head">
+              <h2>Activities</h2>
+              <span class="section-num">06</span>
+            </div>
+            <div class="items">
+              <div class="item">
+                <div class="item-head">
+                  <span class="item-title">Supporter &amp; PR Lead, 13th Korea Internet Governance Forum (KIGF)</span>
+                  <span class="item-date">2024.05–06</span>
+                </div>
+                <div class="item-sub">Public relations for the supporters program and the forum</div>
               </div>
             </div>
           </div>
