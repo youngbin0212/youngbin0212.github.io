@@ -452,6 +452,38 @@ ul.item-body li { margin-bottom: 3px; }
   .journey-tag { font-size: 0.64rem; }
 }
 
+/* ── Life (gallery, breaks the card mold) ── */
+.life-heading {
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+}
+.life-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}
+.life-tile {
+  display: block;
+  transition: transform 0.2s ease;
+}
+.life-tile:hover { transform: translateY(-4px); }
+.life-tile img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.life-caption {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.life-tile:hover .life-caption { color: var(--accent); }
+
 /* ── Footer ── */
 .footer {
   width: min(var(--wrap), calc(100% - 44px));
