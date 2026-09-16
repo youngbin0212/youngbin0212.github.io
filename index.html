@@ -19,475 +19,24 @@
   <meta name="twitter:description" content="M.S. student at KAIST (UVR Lab) researching AR/VR/MR, HCI/UX, and spatial AR experience." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <style>
-    :root {
-      --bg: #f3f3f5;
-      --ink: #111114;
-      --ink2: #3a3a40;
-      --muted: #787880;
-      --soft: #aaabb5;
-      --rule: rgba(0,0,0,0.1);
-      --glass-bg: rgba(255,255,255,0.62);
-      --glass-border: rgba(255,255,255,0.85);
-      --glass-shadow: 0 6px 28px rgba(17,17,20,0.07), 0 1px 0 rgba(255,255,255,0.7) inset;
-      --wrap: 1120px;
-      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-      --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
-      --mono: ui-monospace, SFMono-Regular, Menlo, 'Cascadia Mono', monospace;
-      --accent: #c2683f;     /* terracotta (warm) */
-      --accent-2: #5b7a5b;   /* sage (cool) */
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: 'Inter', 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-
-    /* ── Glass mixin ── */
-    .glass {
-      background: var(--glass-bg);
-      backdrop-filter: blur(22px) saturate(160%);
-      -webkit-backdrop-filter: blur(22px) saturate(160%);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-    }
-
-    /* ── Top controls (Reader / Visual toggle) ── */
-    .top-controls {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 100;
-      display: inline-flex;
-      gap: 8px;
-    }
-    .pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 15px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.10);
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(14px) saturate(150%);
-      -webkit-backdrop-filter: blur(14px) saturate(150%);
-      color: var(--ink2);
-      font: 600 0.8rem/1 'Inter', 'Pretendard', sans-serif;
-      cursor: pointer;
-      transition: transform 0.2s var(--ease), background 0.2s ease, border-color 0.2s ease;
-    }
-    .pill-btn:hover { transform: translateY(-1px); background: #fff; border-color: rgba(0,0,0,0.18); }
-    .pill-btn:active { transform: translateY(0) scale(0.97); }
-    .pill-btn .ico { font-size: 0.9rem; line-height: 1; }
-
-    /* ── Page + layout ── */
-    .page {
-      position: relative;
-      z-index: 1;
-      width: min(var(--wrap), calc(100% - 44px));
-      margin: 0 auto;
-      padding: 40px 0 40px;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 330px minmax(0, 1fr);
-      gap: 40px;
-      align-items: start;
-    }
-
-    /* ── Sidebar / profile card ── */
-    .sidebar {
-      position: sticky;
-      top: 24px;
-    }
-
-    .profile-card {
-      border-radius: 24px;
-      padding: 24px 24px 26px;
-      position: relative;
-    }
-
-    .profile-image {
-      width: 84%;
-      max-width: 100%;
-      margin: 0 auto 20px;
-      aspect-ratio: 4 / 5;
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      border: 1px solid rgba(255,255,255,0.7);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
-      background: rgba(255,255,255,0.4);
-    }
-    .profile-image .pf {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%; object-fit: cover;
-      opacity: 0; transition: opacity 1s ease;
-    }
-    .profile-image .pf-base { opacity: 1; }
-    .profile-image:hover .pf-base { opacity: 0; }
-    .profile-image:hover .pf-alt { opacity: 1; }
-    .profile-fallback {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--soft); font-size: 0.8rem;
-      font-family: var(--mono);
-    }
-
-    .name {
-      margin: 0 0 5px;
-      font-family: var(--serif);
-      font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-    .role { margin: 0; font-size: 0.92rem; font-weight: 600; color: var(--ink2); }
-    .org  { margin: 3px 0 0; font-size: 0.84rem; color: var(--muted); line-height: 1.45; }
-
-    .divider { height: 1px; margin: 20px 0; background: var(--rule); }
-
-    .side-label {
-      margin: 0 0 11px;
-      font-family: var(--mono);
-      font-size: 0.74rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--ink2);
-    }
-
-    .side-list { display: grid; gap: 7px; }
-    .side-list > div {
-      font-size: 0.86rem;
-      color: var(--ink2);
-      padding-left: 13px;
-      position: relative;
-    }
-    .side-list > div::before {
-      content: "";
-      position: absolute;
-      left: 0; top: 0.65em;
-      width: 6px; height: 1px;
-      background: var(--soft);
-    }
-
-    .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-    .contact-list a {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.88rem; color: var(--ink2);
-      transition: color 0.18s ease, transform 0.18s ease;
-    }
-    .contact-list a:hover { color: var(--ink); transform: translateX(2px); }
-    .contact-list .c-ico {
-      font-family: var(--mono);
-      font-size: 0.72rem; color: var(--soft); width: 1em; text-align: center;
-    }
-
-    .section-nav { display: grid; gap: 1px; }
-    .section-nav a {
-      display: flex; align-items: center;
-      padding: 6px 10px 6px 13px;
-      border-radius: 9px;
-      font-size: 0.86rem;
-      color: var(--muted);
-      position: relative;
-      transition: color 0.2s ease, background 0.2s ease, padding-left 0.25s var(--ease);
-    }
-    .section-nav a::before {
-      content: "";
-      position: absolute; left: 4px; top: 50%; transform: translateY(-50%);
-      width: 4px; height: 4px; border-radius: 999px;
-      background: rgba(0,0,0,0.18);
-      transition: background 0.25s ease, width 0.25s ease;
-    }
-    .section-nav a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
-    .section-nav a.active { color: var(--ink); padding-left: 20px; }
-    .section-nav a.active { color: var(--accent); }
-    .section-nav a.active::before { background: var(--accent); width: 11px; height: 1.5px; border-radius: 2px; }
-
-    .cv-btn {
-      display: block; width: 100%; text-align: center;
-      padding: 11px 0; border-radius: 10px;
-      background: var(--ink); color: #fff;
-      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.03em;
-      transition: opacity 0.18s, transform 0.18s;
-    }
-    .cv-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-
-    /* ── Main content ── */
-    .content { min-width: 0; }
-
-    /* ── Hero (top of content) ── */
-    .hero { margin-bottom: 20px; }
-    .eyebrow-row {
-      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 14px; border-radius: 999px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      backdrop-filter: blur(14px) saturate(150%);
-      -webkit-backdrop-filter: blur(14px) saturate(150%);
-      color: var(--ink2); font-size: 0.78rem;
-    }
-    .eyebrow .dot {
-      width: 6px; height: 6px; border-radius: 999px;
-      background: var(--accent); box-shadow: 0 0 8px rgba(194,104,63,0.6);
-    }
-    .meta-clock {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-family: var(--mono);
-      font-size: 0.72rem; color: var(--soft);
-      letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
-    }
-    .hero-statement {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(1.5rem, 3vw, 2.3rem);
-      font-weight: 500; letter-spacing: -0.02em; line-height: 1.28;
-      color: var(--ink);
-    }
-    .hero-statement strong { color: var(--accent); font-weight: 600; font-style: italic; }
-    .hero-statement strong.alt { color: var(--accent-2); }
-    .ph { color: var(--soft); font-weight: inherit; }
-
-    .section { margin-bottom: 16px; }
-
-    .section-card { border-radius: 22px; padding: 32px 36px; position: relative; }
-
-    /* AR detection brackets + label on hover (cards) */
-    .section-card::before, .profile-card::before {
-      content: ""; position: absolute; inset: 9px; border-radius: 12px;
-      border: 1.5px solid var(--accent);
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.25s var(--ease), inset 0.25s var(--ease);
-      -webkit-mask:
-        linear-gradient(#000 0 0) top left, linear-gradient(#000 0 0) top right,
-        linear-gradient(#000 0 0) bottom left, linear-gradient(#000 0 0) bottom right;
-      -webkit-mask-size: 18px 18px; -webkit-mask-repeat: no-repeat;
-      mask:
-        linear-gradient(#000 0 0) top left, linear-gradient(#000 0 0) top right,
-        linear-gradient(#000 0 0) bottom left, linear-gradient(#000 0 0) bottom right;
-      mask-size: 18px 18px; mask-repeat: no-repeat;
-    }
-    .section-card:hover::before, .profile-card:hover::before { opacity: 1; inset: 6px; }
-
-    .section-card::after, .profile-card::after { display: none; }
-
-    .section-head {
-      display: flex; align-items: baseline; gap: 12px;
-      margin-bottom: 22px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .section-head h2 {
-      font-family: var(--serif);
-      font-size: 1.4rem; font-weight: 600; letter-spacing: -0.02em; margin: 0;
-    }
-    .section-num {
-      font-family: var(--mono);
-      font-size: 0.68rem; color: var(--accent); margin-left: auto;
-    }
-
-    /* About */
-    .lead { font-size: 1rem; color: var(--ink2); margin: 0 0 12px; }
-    .intro { font-size: 0.92rem; color: var(--muted); margin: 0; line-height: 1.75; }
-    .intro strong, .lead strong { color: var(--ink2); font-weight: 600; }
-    .intro a, .lead a {
-      color: var(--accent);
-      border-bottom: 1px solid rgba(194,104,63,0.35);
-      transition: border-color 0.18s ease;
-    }
-    .intro a:hover, .lead a:hover { border-color: var(--accent); }
-    .intro a strong, .lead a strong { color: inherit; }
-
-    /* Items */
-    .items { display: grid; gap: 4px; }
-
-    .item { padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.07); }
-    .item:last-child { border-bottom: none; }
-    .item-head {
-      display: flex; justify-content: space-between; align-items: baseline;
-      gap: 12px; flex-wrap: wrap; margin-bottom: 4px;
-    }
-    .item-title { font-size: 0.96rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; }
-    .item-date {
-      font-family: var(--mono);
-      font-size: 0.78rem; color: var(--muted); white-space: nowrap;
-    }
-    .item-sub {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 0.95rem; color: var(--muted); margin-bottom: 8px;
-    }
-    .item-body { font-size: 0.88rem; color: var(--ink2); margin: 0; line-height: 1.7; }
-    ul.item-body { padding-left: 17px; margin: 0; }
-    ul.item-body li { margin-bottom: 3px; }
-
-    .badge {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.58rem; padding: 2px 7px; border-radius: 999px;
-      background: rgba(0,0,0,0.08); color: var(--ink2);
-      text-transform: uppercase; letter-spacing: 0.06em;
-      vertical-align: middle; margin-left: 7px;
-    }
-    .badge.badge-ongoing { background: rgba(91,122,91,0.16); color: #4a684a; }
-    .badge.badge-course  { background: rgba(194,104,63,0.15); color: #a8552f; }
-
-    .pub-me { font-weight: 700; }
-    .pub-title { font-style: italic; }
-    .pub-venue { color: var(--muted); font-size: 0.83rem; }
-
-    .empty-note { color: var(--muted); font-size: 0.9rem; margin: 4px 0 0; }
-
-    .group-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--soft);
-      margin: 22px 0 8px;
-    }
-    .group-label::before {
-      content: "";
-      width: 8px; height: 8px; border-radius: 999px;
-      background: currentColor;
-    }
-    .group-label.research { color: var(--accent-2); }
-    .group-label.course   { color: var(--accent); }
-    .group-label:first-of-type { margin-top: 0; }
-    .item-body a {
-      color: var(--accent);
-      border-bottom: 1px solid rgba(194,104,63,0.35);
-      transition: border-color 0.18s ease;
-    }
-    .item-body a:hover { border-color: var(--accent); }
-
-    /* ── Footer ── */
-    .footer {
-      width: min(var(--wrap), calc(100% - 44px));
-      margin: 8px auto 0;
-      padding: 22px 0 30px;
-      display: flex; justify-content: space-between; align-items: center;
-      border-top: 1px solid var(--rule);
-      flex-wrap: wrap; gap: 8px;
-    }
-    .footer-copy { font-family: var(--mono); font-size: 0.66rem; color: var(--soft); }
-
-    /* ── Entrance animation ── */
-    .fade-up { opacity: 0; transform: translateY(14px); animation: fadeUp 0.6s var(--ease) forwards; }
-    .content .section:nth-child(1) .fade-up,
-    .content .section:nth-child(1) { animation-delay: 0.04s; }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-    /* ═══════════════════════════════════════════
-       READER MODE — flat, single-column, reading-first
-       ═══════════════════════════════════════════ */
-    body.reader { background: #faf8f3; }
-    body.reader .top-controls .pill-btn { background: rgba(255,255,255,0.85); }
-    body.reader .section-card::before,
-    body.reader .section-card::after,
-    body.reader .profile-card::before,
-    body.reader .profile-card::after { display: none !important; }
-
-    /* Copy-to-clipboard email feedback */
-    .copy-email.copied .c-label::after {
-      content: " · copied ✓"; color: #2f9e6f; font-size: 0.78em;
-    }
-    .toast {
-      position: fixed; bottom: 26px; left: 50%;
-      transform: translate(-50%, 16px);
-      padding: 9px 16px; border-radius: 999px;
-      background: rgba(20,20,24,0.9); color: #fff;
-      font-size: 0.82rem; z-index: 200;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.28s ease, transform 0.28s var(--ease);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    .toast.show { opacity: 1; transform: translate(-50%, 0); }
-
-    body.reader .page { max-width: 720px; padding-top: 64px; }
-    body.reader .layout { display: block; }
-    body.reader .sidebar { position: static; margin-bottom: 32px; }
-    body.reader .section-nav,
-    body.reader .profile-image,
-    body.reader .cv-btn { display: none !important; }
-
-    body.reader .eyebrow {
-      background: transparent !important;
-      border: 0 !important;
-      padding: 0 !important;
-      color: var(--muted) !important;
-    }
-    body.reader .eyebrow .dot { display: none !important; }
-    body.reader .hero-statement { font-size: 1.6rem; }
-
-    body.reader .glass {
-      background: transparent !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-      border: 0 !important;
-      box-shadow: none !important;
-    }
-    body.reader .profile-card { padding: 0; }
-    body.reader .section-card { padding: 0; margin-bottom: 40px; }
-    body.reader .section-head { border-bottom: 1px solid rgba(0,0,0,0.16); }
-    body.reader .profile-image { box-shadow: none; border: 1px solid rgba(0,0,0,0.08); }
-    body.reader .side-list > div::before { background: rgba(0,0,0,0.3); }
-    body.reader .contact-list a { text-decoration: underline; text-underline-offset: 3px; }
-    body.reader .item { border-bottom: 1px solid rgba(0,0,0,0.10); }
-    body.reader .divider { background: rgba(0,0,0,0.12); }
-
-    /* ── Responsive ── */
-    @media (max-width: 920px) {
-      .layout { grid-template-columns: 1fr; gap: 28px; }
-      .sidebar { position: static; }
-      .profile-card { display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start; }
-      .profile-image { margin: 0; }
-      .profile-card .divider:first-of-type { display: none; }
-    }
-
-    @media (max-width: 640px) {
-      .page { width: calc(100% - 28px); }
-      .section-card { padding: 24px 22px; }
-      .profile-card { grid-template-columns: 1fr; gap: 18px; }
-      .profile-image { max-width: 160px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- Reader / Visual toggle -->
-  <div class="top-controls">
-    <button class="pill-btn" id="readerToggle" type="button" aria-pressed="false" title="Toggle reading mode">
-      <span class="ico" id="readerIco">◑</span><span id="readerLabel">Reader</span>
-    </button>
+  <!-- Top nav -->
+  <div class="top-nav glass">
+    <div class="top-nav-inner">
+      <span class="top-nav-brand">Young Bin Kim</span>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="#about">About</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="more.html">More</a>
+        <a href="life.html">Life</a>
+      </nav>
+    </div>
   </div>
 
   <div class="page">
@@ -497,13 +46,14 @@
       <aside class="sidebar">
         <div class="profile-card glass fade-up">
           <div class="profile-image">
-            <img class="pf pf-base" src="images/3.jpg" alt="Young Bin Kim" />
-            <img class="pf pf-alt" src="images/xr_1.png" alt="Young Bin Kim" loading="lazy" />
+            <div class="flip-inner">
+              <img class="pf pf-base" src="images/3.jpg" alt="Young Bin Kim" />
+              <img class="pf pf-alt" src="images/xr_1.png" alt="Young Bin Kim" loading="lazy" />
+            </div>
+            <span class="flip-badge" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </span>
           </div>
-
-          <h1 class="name">Young Bin Kim</h1>
-          <p class="role">M.S. Student</p>
-          <p class="org">KAIST Graduate School of Culture Technology</p>
 
           <div class="divider"></div>
 
@@ -518,55 +68,29 @@
 
           <div class="side-label">Contact</div>
           <ul class="contact-list">
-            <li><a href="mailto:kimyb@kaist.ac.kr" class="copy-email" data-email="kimyb@kaist.ac.kr"><span class="c-ico">✉</span><span class="c-label">Email</span></a></li>
-            <li><a href="https://www.linkedin.com/in/youngbinkim-xr/" target="_blank" rel="noopener"><span class="c-ico">in</span>LinkedIn</a></li>
-            <li><a href="https://scholar.google.com/citations?hl=ko&user=UhT1BzcAAAAJ" target="_blank" rel="noopener"><span class="c-ico">◈</span>Google Scholar</a></li>
+            <li><a href="mailto:kimyb@kaist.ac.kr" class="copy-email" data-email="kimyb@kaist.ac.kr"><span class="c-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span><span class="c-label">Email</span></a></li>
+            <li><a href="https://www.linkedin.com/in/youngbinkim-xr/" target="_blank" rel="noopener"><span class="c-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>LinkedIn</a></li>
+            <li><a href="https://scholar.google.com/citations?hl=ko&user=UhT1BzcAAAAJ" target="_blank" rel="noopener"><span class="c-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></span>Google Scholar</a></li>
+            <li><a href="https://github.com/youngbin0212" target="_blank" rel="noopener"><span class="c-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span>GitHub</a></li>
           </ul>
 
           <div class="divider"></div>
 
-          <nav class="section-nav" aria-label="Sections">
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#publications">Publications</a>
-            <a href="#projects">Projects</a>
-            <a href="#awards">Awards</a>
-            <a href="#patents">Patents</a>
-            <a href="#activities">Activities</a>
-          </nav>
+          <a href="cv.pdf" class="cv-btn" target="_blank" rel="noopener">Download CV</a>
 
-          <!-- CV: cv.pdf 파일을 같은 폴더에 넣으면 활성화. 없으면 이 줄 삭제
-          <div class="divider"></div>
-          <a href="cv.pdf" class="cv-btn">Download CV →</a>
-          -->
         </div>
       </aside>
 
       <!-- Main content -->
       <main class="content">
 
-        <!-- Hero (fill in the bracketed text later) -->
-        <header class="hero fade-up">
-          <div class="eyebrow-row">
-            <span class="eyebrow">
-              <span class="dot"></span>
-              <span>Augmented Reality · Virtual Reality · Spatial Computing</span>
-            </span>
-            <span class="meta-clock">Daejeon · <span id="kstClock">--:--</span> KST</span>
-          </div>
-          <h2 class="hero-statement">Exploring how information can <strong>live</strong> in space and <strong class="alt">respond</strong> to what we do.</h2>
-        </header>
-
         <!-- About -->
         <section class="section" id="about">
-          <div class="section-card glass fade-up">
-            <div class="section-head">
-              <h2>About</h2>
-              <span class="section-num">00</span>
-            </div>
-            <p class="lead">I research augmented and virtual reality systems that connect physical spaces, and people through ubiquitous computing.</p>
+          <div class="section-plain fade-up">
+            <h2 class="hello-heading">Hi, I'm Young Bin,</h2>
+            <p class="lead">I am a M.S. student at <a href="https://www.kaist.ac.kr/en/" target="_blank" rel="noopener">KAIST</a>'s <a href="https://ct.kaist.ac.kr/" target="_blank" rel="noopener">Graduate School of Culture Technology</a>, advised by Prof. <a href="https://scholar.google.com/citations?user=s3Z4Q1oAAAAJ&hl=en" target="_blank" rel="noopener">Woontack Woo</a> at the <a href="https://uvrlab.org/" target="_blank" rel="noopener">UVR Lab</a>.</p>
             <p class="intro">
-              I am an M.S. student in the <a href="https://uvrlab.org/" target="_blank" rel="noopener"><strong>UVR Lab</strong></a> at KAIST, advised by Prof. <strong>Woontack Woo</strong>. My work spans <strong>real-time 6DoF tracking of hand-held objects</strong> on standalone headsets, and <strong>interaction-driven techniques</strong> that let a user's behavior control how the system runs.
+              My research explores how to <strong>expand what objects can do</strong> within AR systems. Moving beyond simply reconstructing and tracking objects, I aim to <strong>connect their physical form with their function</strong>, <strong>enable users to interact with both physical and virtual objects</strong>, and ultimately <strong>create new forms of interaction</strong> by allowing the two to extend each other's possibilities.
             </p>
           </div>
         </section>
@@ -576,7 +100,6 @@
           <div class="section-card glass fade-up">
             <div class="section-head">
               <h2>Education</h2>
-              <span class="section-num">01</span>
             </div>
             <div class="items">
               <div class="item">
@@ -584,268 +107,17 @@
                   <span class="item-title">Korea Advanced Institute of Science and Technology (KAIST)</span>
                   <span class="item-date">2025 – Present</span>
                 </div>
-                <div class="item-sub">M.S. Student · Graduate School of Culture Technology · UVR Lab</div>
+                <p class="edu-degree">M.S. in Graduate School of Culture Technology (UVR Lab)</p>
+                <p class="edu-advisor">Advisor: Prof. Woontack Woo</p>
               </div>
               <div class="item">
                 <div class="item-head">
                   <span class="item-title">Handong Global University</span>
                   <span class="item-date">2020 – 2025</span>
                 </div>
-                <div class="item-sub">B.S. AI Convergence &amp; Entrepreneurship · B.A. International Studies (Double Major)</div>
-                <p class="item-body">Graduated <em>Cum Laude</em> · GPA 4.18 / 4.06 (4.5)</p>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Moanalua High School</span>
-                  <span class="item-date">– 2019</span>
-                </div>
-                <div class="item-sub">Honolulu, Hawaii, USA</div>
-                <p class="item-body">Graduated <em>Summa Cum Laude</em>.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Publications -->
-        <section class="section" id="publications">
-          <div class="section-card glass fade-up">
-            <div class="section-head">
-              <h2>Publications</h2>
-              <span class="section-num">02</span>
-            </div>
-            <div class="items">
-              <div class="item">
-                <p class="item-body">
-                  <span class="pub-me">Young Bin Kim</span>, S. Kang, M. Baeck, S. Kim, &amp; W. Woo. (2025).
-                  <span class="pub-title">Architectural Elements Augmentation from 2D Artworks for Spatial Experience of AR Exhibition.</span>
-                  <span class="pub-venue">2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct).</span>
-                </p>
-              </div>
-              <div class="item">
-                <p class="item-body">
-                  <span class="pub-me">Young Bin Kim</span>, J. Jeon, &amp; W. Woo. (2025).
-                  <span class="pub-title">Instance-Aware Object-Centric 3D Map Generation Framework.</span>
-                  <span class="pub-venue">Korea Computer Congress (KCC 2025).</span>
-                </p>
-              </div>
-              <div class="item">
-                <p class="item-body">
-                  Yunseop Kim, <span class="pub-me">Young Bin Kim</span>, Jina Lee, Jiseong Lee, Jaeho Lim, &amp; Daseong Han. (2024).
-                  <span class="pub-title">A Video-based Framework for Collecting Whole-body and Hand Motion Data.</span>
-                  <span class="pub-venue">Korean HCI Society Conference (HCI Korea 2024), pp. 87–91.</span>
-                </p>
-              </div>
-              <div class="item">
-                <p class="item-body">
-                  Jiseong Lee, <span class="pub-me">Young Bin Kim</span>, Yunseop Kim, Jina Lee, Jaeho Lim, &amp; Daseong Han. (2024).
-                  <span class="pub-title">Finger Motion Generation for Captured Whole Body Motion.</span>
-                  <span class="pub-venue">Korea Computer Graphics Society Conference (KCGS 2024), pp. 111–112.</span>
-                </p>
-              </div>
-              <div class="item">
-                <p class="item-body">
-                  <span class="pub-me">Young Bin Kim</span>, et al. (2024).
-                  <span class="pub-title">Measurement of VR Motion Sickness and Analysis of User Behavior Using VR Game and SSQ.</span>
-                  <span class="pub-venue">Korean HCI Society Conference (HCI Korea 2024), pp. 37–42.</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Projects -->
-        <section class="section" id="projects">
-          <div class="section-card glass fade-up">
-            <div class="section-head">
-              <h2>Projects</h2>
-              <span class="section-num">03</span>
-            </div>
-
-            <div class="group-label research">Research</div>
-            <div class="items">
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">WISE UI <span class="badge badge-ongoing">Ongoing</span></span>
-                  <span class="item-date">2025</span>
-                </div>
-                <div class="item-sub">KAIST UVR Lab · Augmented Space-Time team</div>
-                <ul class="item-body">
-                  <li>A platform that brings a shared UI to everyone using AR glasses. It reconstructs the surrounding space and the user’s location at a consistent level in any environment, estimates integrated attention from physical cues together with the user’s personal traits and nearby objects, and enables organic, personalized information augmentation and interaction across diverse spaces.</li>
-                  <li>I focused on recognizing the augmented space and its objects, then built an efficient on-device HMD system to track everyday objects around the user.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="group-label course">Coursework</div>
-            <div class="items">
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">K-Culture Stress Hunters <span class="badge badge-course">Course</span></span>
-                  <span class="item-date">2025 Fall</span>
-                </div>
-                <div class="item-sub">MV6000 · Augmented Reality Project · KAIST</div>
-                <ul class="item-body">
-                  <li>A K-Culture-based AR system for implicit stress relief through play. A three-stage embodied interaction (Affect Labeling, Externalization, and Relational Healing) lets users objectify negative emotions and resolve them through playful manipulation, drawing on Korean motifs (Moon Jar, folk paintings, <em>Jeong</em> 情). A pilot study showed increased positive affect and reduced state anxiety and stress. <em>(First author)</em></li>
-                  <li><a href="https://www.youtube.com/watch?v=r3VlDy17Ygo" target="_blank" rel="noopener">Demo video ↗</a> (Korean)</li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">ASL (American Sign Language)-based Shortcut Gesture for 3D Interaction <span class="badge badge-course">Course</span></span>
-                  <span class="item-date">2026 Spring</span>
-                </div>
-                <div class="item-sub">GCT555 · 3D Interaction Design · KAIST</div>
-                <ul class="item-body">
-                  <li>2D keyboard shortcuts like Ctrl+C / V are universal, but 3D interfaces have no shared gesture vocabulary yet. <em>Short-cut</em> introduces a familiar, intuitive 3D shortcut system that maps Ctrl+C / F / Z / X directly to ASL finger-spelling gestures.</li>
-                  <li>A camera tracks both hands in real time and recognizes Copy / Find / Undo / Delete (distinguishing left and right hands); users then select and place blocks in 3D space with a pinch interaction, with real-time visual feedback on match status.</li>
-                  <li><a href="https://testgreen.my.canva.site/3did-team3-webpage" target="_blank" rel="noopener">Project website ↗</a></li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">AR Exhibition: Architectural Elements Augmentation <span class="badge badge-course">Course</span></span>
-                  <span class="item-date">2025 Summer</span>
-                </div>
-                <div class="item-sub">CTP445 · Augmented Reality · KAIST</div>
-                <ul class="item-body">
-                  <li>A spatial augmentation system for AR exhibitions that immersively reinterprets 2D artworks. Taking an artwork image (e.g., Raphael’s <em>The School of Athens</em> on an LED wall) as input, it generates floor patterns and architectural 3D models and semantically aligns them with the physical space, giving visitors the feeling of actually stepping inside the painting.</li>
-                  <li>Course project that led to a poster at <strong>ISMAR 2025</strong> (see Publications).</li>
-                  <li><a href="https://www.youtube.com/watch?v=j61Wwzv6-z8" target="_blank" rel="noopener">Demo video ↗</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="group-label research">Undergraduate</div>
-            <div class="items">
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Media Facade: “Under the Pohang Sea”</span>
-                  <span class="item-date">2024</span>
-                </div>
-                <div class="item-sub">Pohang Buk-gu District Office · Unreal Engine</div>
-                <ul class="item-body">
-                  <li>An underwater media facade video for the Pohang Buk-gu District Office building on the theme “Change, Leap, and Hope.” I wrote the scenario and built the visuals and effects (water, marine life, lighting, shaders) in Unreal Engine.</li>
-                  <li>Grand Prize (HGU President’s Award), Pohang Media Facade Hackathon (see Awards). <a href="https://drive.google.com/file/d/1lDA7brPElYurYxzpVdliflBsYmjG3cZL/view" target="_blank" rel="noopener">Demo video ↗</a></li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">EasyDizzy</span>
-                  <span class="item-date">2023</span>
-                </div>
-                <div class="item-sub">VR motion-sickness adaptation game</div>
-                <ul class="item-body">
-                  <li>A first-person VR running game that helps players adapt to motion sickness via a <em>progressive overload</em> system. I designed and developed the game and the adaptation system.</li>
-                  <li><a href="https://www.youtube.com/watch?v=psEi4tKPDoI" target="_blank" rel="noopener">Demo video ↗</a></li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Legend of XR in the Metaverse of Madness</span>
-                  <span class="item-date">2023</span>
-                </div>
-                <div class="item-sub">XR-studio training VR content · Unity · Team Lead</div>
-                <ul class="item-body">
-                  <li>A Unity VR experience that recreates an XR studio in the metaverse so anyone can try virtual-production, played out as a three-quest story across two maps. As team lead, I led the team and built the characters, VR interactions, and intro cinematic.</li>
-                  <li>Excellence Award, 3rd COSS Metaverse Contest (see Awards). <a href="https://www.youtube.com/watch?v=6277QEabWss" target="_blank" rel="noopener">Demo video ↗</a></li>
-                </ul>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Handong University Metaverse</span>
-                  <span class="item-date">2022</span>
-                </div>
-                <div class="item-sub">Virtual campus platform · Unity</div>
-                <ul class="item-body">
-                  <li>A virtual Handong University campus in Unity, 3D-modeled from drone footage, letting students and visitors explore the campus and join activities online. I built the platform structure, character interactions, and multi-user networking, and managed the project.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Awards -->
-        <section class="section" id="awards">
-          <div class="section-card glass fade-up">
-            <div class="section-head">
-              <h2>Honors &amp; Awards</h2>
-              <span class="section-num">04</span>
-            </div>
-            <div class="items">
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Grand Prize · HGU President’s Award, Pohang Culture &amp; Arts Factory Hackathon</span>
-                  <span class="item-date">2024.01</span>
-                </div>
-                <div class="item-sub">City of Pohang · Coding Ground · Handong Global University</div>
-                <p class="item-body">Developed a media facade showcase video (“Under the Sea”) using Unreal Engine.</p>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Creativity Award, Metaverse Asset Idea Contest</span>
-                  <span class="item-date">2023.12</span>
-                </div>
-                <div class="item-sub">Korea Electronics Technology Institute (KETI) · Dept. of Art &amp; Technology, Seokyeong University</div>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Excellence Award, Metaverse Contest</span>
-                  <span class="item-date">2023.11</span>
-                </div>
-                <div class="item-sub">Convergence and Open Sharing System (COSS), Ministry of Education, Republic of Korea</div>
-                <p class="item-body">Designed <em>Legend of XR in the Metaverse of Madness</em>, a fantasy-themed XR training experience in Unity where learners acquire XR studio skills through three progressive stages of immersive gameplay.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Patents -->
-        <section class="section" id="patents">
-          <div class="section-card glass fade-up">
-            <div class="section-head">
-              <h2>Patents &amp; Certifications</h2>
-              <span class="section-num">05</span>
-            </div>
-            <div class="items">
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">AI-900: Microsoft Azure, Machine Learning, and AI</span>
-                  <span class="item-date">Certification</span>
-                </div>
-                <div class="item-sub">Microsoft</div>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Unity Game Engine Camp</span>
-                  <span class="item-date">2023.07</span>
-                </div>
-                <div class="item-sub">Handong Global University</div>
-              </div>
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Unreal Engine Training Camp</span>
-                  <span class="item-date">2023.12</span>
-                </div>
-                <div class="item-sub">Pohang Media Facade Camp · Hosted by the City of Pohang · Organized by KT, Handong Global University, WNCW &amp; Coding Ground</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Activities -->
-        <section class="section" id="activities">
-          <div class="section-card glass fade-up">
-            <div class="section-head">
-              <h2>Activities</h2>
-              <span class="section-num">06</span>
-            </div>
-            <div class="items">
-              <div class="item">
-                <div class="item-head">
-                  <span class="item-title">Supporter &amp; PR Lead, 13th Korea Internet Governance Forum (KIGF)</span>
-                  <span class="item-date">2024.05–06</span>
-                </div>
-                <div class="item-sub">Public relations for the supporters program and the forum</div>
+                <p class="edu-degree">B.S. in AI Convergence &amp; Entrepreneurship, B.A. in International Studies (Double Major)</p>
+                <p class="edu-advisor">Advisor: Prof. Daseong Han</p>
+                <p class="edu-advisor">Graduated <em>Cum Laude</em></p>
               </div>
             </div>
           </div>
@@ -853,6 +125,22 @@
 
       </main>
     </div><!-- /.layout -->
+
+    <!-- Research journey -->
+    <section class="section journey-section fade-up" id="journey">
+      <div class="journey-card">
+        <div class="journey-chapters">
+          <span class="journey-chapter"><strong>Undergrad</strong> — break out of the flat screen into 3D. Motion sickness. Thin content. Old habits.</span>
+          <span class="journey-chapter"><strong>Master's</strong> — make real objects feel real. Reconstruction. Immersion. Material. And now, function on the fly.</span>
+        </div>
+        <div class="journey-scene">
+          <canvas id="journeyCanvas" aria-label="A flat plane that a shape passes through into the depth beyond, on hover"></canvas>
+          <span class="journey-tag journey-tag-merge">hover to go through</span>
+        </div>
+        <p class="journey-punch">1 (virtual) + 1 (real) was never going to equal 2.</p>
+      </div>
+    </section>
+
   </div><!-- /.page -->
 
   <footer class="footer">
@@ -862,38 +150,18 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <script src="journey.js"></script>
   <script>
-    // ── Reader / Visual mode toggle (persisted) ──
+    // ── Section nav active highlighting (About / Education anchors on this page) ──
     (function () {
-      var body = document.body;
-      var btn = document.getElementById('readerToggle');
-      var label = document.getElementById('readerLabel');
-      var ico = document.getElementById('readerIco');
-
-      function apply(mode) {
-        var reader = mode === 'reader';
-        body.classList.toggle('reader', reader);
-        btn.setAttribute('aria-pressed', String(reader));
-        label.textContent = reader ? 'Visual' : 'Reader';
-        ico.textContent = reader ? '◐' : '◑';
-      }
-
-      var saved = null;
-      try { saved = localStorage.getItem('viewMode'); } catch (e) {}
-      apply(saved === 'reader' ? 'reader' : 'visual');
-
-      btn.addEventListener('click', function () {
-        var next = body.classList.contains('reader') ? 'visual' : 'reader';
-        apply(next);
-        try { localStorage.setItem('viewMode', next); } catch (e) {}
-      });
-    })();
-
-    // ── Section nav active highlighting ──
-    (function () {
-      var links = Array.prototype.slice.call(document.querySelectorAll('.section-nav a'));
+      var links = Array.prototype.slice.call(document.querySelectorAll('.site-nav a'));
       var map = {};
-      links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+      links.forEach(function (a) {
+        var href = a.getAttribute('href');
+        if (href.charAt(0) === '#') map[href.slice(1)] = a;
+      });
 
       var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
@@ -906,46 +174,6 @@
       }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
 
       document.querySelectorAll('.section').forEach(function (s) { obs.observe(s); });
-    })();
-
-    // ── Live Daejeon (KST) clock ──
-    (function () {
-      var el = document.getElementById('kstClock');
-      if (!el) return;
-      function tick() {
-        try {
-          el.textContent = new Date().toLocaleTimeString('en-GB', {
-            timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hour12: false
-          });
-        } catch (e) { el.textContent = '--:--'; }
-      }
-      tick();
-      setInterval(tick, 10000);
-    })();
-
-    // ── Click-to-copy email ──
-    (function () {
-      var toast = document.getElementById('toast');
-      var tHide = null;
-      function showToast(msg) {
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add('show');
-        clearTimeout(tHide);
-        tHide = setTimeout(function () { toast.classList.remove('show'); }, 1800);
-      }
-      document.querySelectorAll('.copy-email').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          var email = a.getAttribute('data-email');
-          if (!navigator.clipboard) return; // fall back to mailto
-          e.preventDefault();
-          navigator.clipboard.writeText(email).then(function () {
-            a.classList.add('copied');
-            showToast(email + ' copied to clipboard');
-            setTimeout(function () { a.classList.remove('copied'); }, 1600);
-          }).catch(function () { window.location.href = 'mailto:' + email; });
-        });
-      });
     })();
   </script>
 
